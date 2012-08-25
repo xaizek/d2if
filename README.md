@@ -22,7 +22,7 @@ Fields
 * Display brightness (basic implementation).
 * Current audio level (basic implementation).
 * Battery status (basic implementation).
-* Network interfaces status (not implemented yet).
+* Network interfaces status (basic implementation).
 
 Features
 --------

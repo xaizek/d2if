@@ -1,4 +1,4 @@
-CXXFLAGS := -Wall -MD -Werror -std=c++11
+CXXFLAGS := -Wall -Os -MD -Werror -std=c++11
 LDFLAGS := -lasound
 
 PROJECT_NAME := $(notdir $(abspath ..))
