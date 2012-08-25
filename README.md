@@ -23,6 +23,7 @@ Fields
 * Current audio level (basic implementation).
 * Battery status (basic implementation).
 * Network interfaces status (basic implementation).
+* Active keyboard layout (basic implementation).
 
 Features
 --------

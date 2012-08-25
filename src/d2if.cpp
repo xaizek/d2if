@@ -21,6 +21,7 @@
 #include "Battery.hpp"
 #include "Cpu.hpp"
 #include "Display.hpp"
+#include "Layout.hpp"
 #include "Memory.hpp"
 #include "Network.hpp"
 #include "StatusBar.hpp"
@@ -32,6 +33,7 @@ int main(void)
 {
     StatusBar statusBar;
     statusBar.addField(std::make_shared<Time>());
+    statusBar.addField(std::make_shared<Layout>());
     statusBar.addField(std::make_shared<Memory>());
     statusBar.addField(std::make_shared<Cpu>());
     statusBar.addField(std::make_shared<Display>());
