@@ -15,33 +15,24 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
-#include <chrono>
-#include <iostream>
+#ifndef __VOLUME_HPP__
+#define __VOLUME_HPP__
 
-#include "Cpu.hpp"
-#include "Display.hpp"
-#include "Memory.hpp"
-#include "StatusBar.hpp"
-#include "Time.hpp"
-#include "Timer.hpp"
-#include "Volume.hpp"
+#include "Field.hpp"
 
-int main(void)
+class Volume : public Field
 {
-    StatusBar statusBar;
-    statusBar.addField(std::make_shared<Time>());
-    statusBar.addField(std::make_shared<Memory>());
-    statusBar.addField(std::make_shared<Cpu>());
-    statusBar.addField(std::make_shared<Display>());
-    statusBar.addField(std::make_shared<Volume>());
+public:
+    Volume() = default;
 
-    Timer timer {
-        [&]() {
-            std::cout << statusBar.getText() << std::endl;
-        }
-    };
+    // These operations are forbidden.
+    Volume(Volume &&rhs) = delete;
+    Volume & operator=(Volume &&rhs) = delete;
 
-    timer.run(std::chrono::seconds(1));
+    virtual void update() override;
 
-    return (0);
-}
+private:
+    int getVolumeLevel() const;
+};
+
+#endif // __VOLUME_HPP__

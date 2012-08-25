@@ -20,7 +20,7 @@ Fields
 * Memory usage (basic implementation).
 * CPU usage (basic implementation).
 * Display brightness (basic implementation).
-* Current audio level (not implemented yet).
+* Current audio level (basic implementation).
 * Battery status (not implemented yet).
 * Network interfaces status (not implemented yet).
 

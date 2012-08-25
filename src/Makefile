@@ -1,4 +1,5 @@
-CXXFLAGS := -Wall -Werror -std=c++11
+CXXFLAGS := -Wall -MD -Werror -std=c++11
+LDFLAGS := -lasound
 
 PROJECT_NAME := $(notdir $(abspath ..))
 SOURCE_FILES := $(wildcard *.cpp)
@@ -7,7 +8,7 @@ OBJECT_FILES := $(SOURCE_FILES:.cpp=.o)
 .PHONY: run clear
 
 $(PROJECT_NAME): $(OBJECT_FILES)
-	g++ $(OBJECT_FILES) -o $@
+	g++ $(LDFLAGS) $(OBJECT_FILES) -o $@
 
 run: $(PROJECT_NAME)
 	./$^ | dzen2 -ta l -h 17 -fn -inconsolata-terminal-bold-*-*--13-*-*-*-*-*-*-*
