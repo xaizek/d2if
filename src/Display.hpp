@@ -15,31 +15,24 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
-#include <chrono>
-#include <iostream>
+#ifndef __DISPLAY_HPP__
+#define __DISPLAY_HPP__
 
-#include "Cpu.hpp"
-#include "Display.hpp"
-#include "Memory.hpp"
-#include "StatusBar.hpp"
-#include "Time.hpp"
-#include "Timer.hpp"
+#include "Field.hpp"
 
-int main(void)
+class Display : public Field
 {
-    StatusBar statusBar;
-    statusBar.addField(std::make_shared<Time>());
-    statusBar.addField(std::make_shared<Memory>());
-    statusBar.addField(std::make_shared<Cpu>());
-    statusBar.addField(std::make_shared<Display>());
+public:
+    Display() = default;
 
-    Timer timer {
-        [&]() {
-            std::cout << statusBar.getText() << std::endl;
-        }
-    };
+    // These operations are forbidden.
+    Display(Display &&rhs) = delete;
+    Display & operator=(Display &&rhs) = delete;
 
-    timer.run(std::chrono::seconds(1));
+    virtual void update() override;
 
-    return (0);
-}
+private:
+    int getDisplayBrightness() const;
+};
+
+#endif // __DISPLAY_HPP__

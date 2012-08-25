@@ -15,31 +15,38 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
-#include <chrono>
-#include <iostream>
-
-#include "Cpu.hpp"
 #include "Display.hpp"
-#include "Memory.hpp"
-#include "StatusBar.hpp"
-#include "Time.hpp"
-#include "Timer.hpp"
 
-int main(void)
+#include <fstream>
+#include <sstream>
+#include <string>
+
+void Display::update()
 {
-    StatusBar statusBar;
-    statusBar.addField(std::make_shared<Time>());
-    statusBar.addField(std::make_shared<Memory>());
-    statusBar.addField(std::make_shared<Cpu>());
-    statusBar.addField(std::make_shared<Display>());
+    const std::string BAR = "#A6F09D";
 
-    Timer timer {
-        [&]() {
-            std::cout << statusBar.getText() << std::endl;
-        }
-    };
+    const int actual = getDisplayBrightness();
 
-    timer.run(std::chrono::seconds(1));
+    std::stringstream result;
 
-    return (0);
+    result << "^fg(white)DB: "
+           << "^fg(" << BAR << ")"
+           << actual << "%";
+
+    Field::setText(result.str());
+}
+
+int Display::getDisplayBrightness() const
+{
+    int maxValue;
+    std::ifstream max("/sys/class/backlight/acpi_video0/max_brightness");
+    max >> maxValue;
+    max.close();
+
+    int actualValue;
+    std::ifstream actual("/sys/class/backlight/acpi_video0/actual_brightness");
+    actual >> actualValue;
+    actual.close();
+
+    return ((100*actualValue)/maxValue);
 }

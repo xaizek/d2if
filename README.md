@@ -19,7 +19,7 @@ Fields
 * Date and time (basic implementation).
 * Memory usage (basic implementation).
 * CPU usage (basic implementation).
-* Display brightness (not implemented yet).
+* Display brightness (basic implementation).
 * Current audio level (not implemented yet).
 * Battery status (not implemented yet).
 * Network interfaces status (not implemented yet).
