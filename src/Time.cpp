@@ -18,6 +18,7 @@
 #include "Time.hpp"
 
 #include <chrono>
+#include <sstream>
 #include <string>
 
 std::string Time::FORMAT { "%Y.%m.%d %H:%M:%S" };
@@ -27,9 +28,11 @@ std::string Time::getText() const
     const std::time_t rawTime { std::time(nullptr) };
     const std::tm *timeInfo { std::localtime(&rawTime) };
 
+    std::stringstream result;
+
     char buffer[80];
     if (std::strftime(buffer, sizeof(buffer), FORMAT.c_str(), timeInfo) > 0) {
-        return buffer;
+        result << "^fg(white)" << buffer;
     }
-    return "";
+    return (result.str());
 }

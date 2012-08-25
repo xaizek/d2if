@@ -17,7 +17,7 @@ Fields
 ------
 
 * Date and time (basic implementation).
-* Memory usage (not implemented yet).
+* Memory usage (basic implementation).
 * CPU usage (not implemented yet).
 * Display brightness (not implemented yet).
 * Current audio level (not implemented yet).

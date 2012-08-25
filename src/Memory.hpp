@@ -15,27 +15,27 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
-#include <chrono>
-#include <iostream>
+#ifndef __MEMORY_HPP__
+#define __MEMORY_HPP__
 
-#include "Memory.hpp"
-#include "StatusBar.hpp"
-#include "Time.hpp"
-#include "Timer.hpp"
+#include <string>
+#include <utility>
 
-int main(void)
+#include "Field.hpp"
+
+class Memory : public Field
 {
-    StatusBar statusBar;
-    statusBar.addField(std::shared_ptr<Field> { new Time() });
-    statusBar.addField(std::shared_ptr<Field> { new Memory() });
+public:
+    Memory() = default;
 
-    Timer timer {
-        [&]() {
-            std::cout << statusBar.getText() << std::endl;
-        }
-    };
+    // These operations are forbidden.
+    Memory(Memory &&rhs) = delete;
+    Memory & operator=(Memory &&rhs) = delete;
 
-    timer.run(std::chrono::seconds(1));
+    virtual std::string getText() const override;
 
-    return (0);
-}
+private:
+    int getMemoryUsage() const;
+};
+
+#endif // __MEMORY_HPP__
