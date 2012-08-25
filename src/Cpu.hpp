@@ -15,29 +15,30 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
-#include <chrono>
-#include <iostream>
+#ifndef __CPU_HPP__
+#define __CPU_HPP__
 
-#include "Cpu.hpp"
-#include "Memory.hpp"
-#include "StatusBar.hpp"
-#include "Time.hpp"
-#include "Timer.hpp"
+#include <string>
+#include <utility>
 
-int main(void)
+#include "Field.hpp"
+
+class Cpu : public Field
 {
-    StatusBar statusBar;
-    statusBar.addField(std::make_shared<Time>());
-    statusBar.addField(std::make_shared<Memory>());
-    statusBar.addField(std::make_shared<Cpu>());
+public:
+    Cpu();
 
-    Timer timer {
-        [&]() {
-            std::cout << statusBar.getText() << std::endl;
-        }
-    };
+    // These operations are forbidden.
+    Cpu(Cpu &&rhs) = delete;
+    Cpu & operator=(Cpu &&rhs) = delete;
 
-    timer.run(std::chrono::seconds(1));
+    virtual void update() override;
 
-    return (0);
-}
+private:
+    typedef std::pair<long, long> cpuInfo;
+    cpuInfo last;
+
+    cpuInfo getCpuUsage() const;
+};
+
+#endif // __CPU_HPP__
