@@ -16,7 +16,7 @@ since status bar should be updated regularly.
 Fields
 ------
 
-* Date and time (not implemented yet).
+* Date and time (basic implementation).
 * Memory usage (not implemented yet).
 * CPU usage (not implemented yet).
 * Display brightness (not implemented yet).
