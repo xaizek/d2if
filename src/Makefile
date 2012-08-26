@@ -4,7 +4,7 @@ PROJECT_NAME := $(notdir $(abspath ..))
 SOURCE_FILES := $(wildcard *.cpp)
 OBJECT_FILES := $(SOURCE_FILES:.cpp=.o)
 
-.PHONY: run
+.PHONY: run clear
 
 $(PROJECT_NAME): $(OBJECT_FILES)
 	g++ $(OBJECT_FILES) -o $@
@@ -14,5 +14,8 @@ run: $(PROJECT_NAME)
 
 .cpp.o:
 	g++ -c $(CXXFLAGS) -o $@ $<
+
+clear:
+	-$(RM) *.o *.d
 
 include $(wildcard *.d)
