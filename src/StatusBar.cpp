@@ -39,10 +39,16 @@ void StatusBar::setFieldDelimiter(const std::string &delimiter)
     fieldDelimiter = delimiter;
 }
 
+void StatusBar::setFieldDelimiterColor(const std::string &delimiterColor)
+{
+    fieldDelimiterColor = delimiterColor;
+}
+
 std::string StatusBar::getText() const
 {
     std::stringstream result;
-    const std::string sep = "^pa(;0)" + fieldDelimiter;
+    const std::string color = "^fg(" + fieldDelimiterColor + ")";
+    const std::string sep = "^pa(;0)" + color + fieldDelimiter;
     std::ostream_iterator<std::shared_ptr<Field>> outIt {
         result, sep.c_str()
     };

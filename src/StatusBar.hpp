@@ -36,12 +36,14 @@ public:
     void addField(std::shared_ptr<Field> field);
 
     void setFieldDelimiter(const std::string &delimiter);
+    void setFieldDelimiterColor(const std::string &delimiterColor);
 
     std::string getText() const;
 
 private:
     std::vector<std::shared_ptr<Field>> fields;
     std::string fieldDelimiter = " | ";
+    std::string fieldDelimiterColor = "white";
 };
 
 #endif // __STATUSBAR_HPP__
