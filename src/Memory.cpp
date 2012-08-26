@@ -36,7 +36,8 @@ void Memory::update()
 
     std::stringstream result;
 
-    result << "^fg(white)MEM:^p(2;3)"
+    result << "^fg(white)MEM:"
+           << "^p(2;3)"
            << "^fg(" << fgColor << ")"
            << "^r(" << used << "x10)"
            << "^fg(" << BAR << ")"

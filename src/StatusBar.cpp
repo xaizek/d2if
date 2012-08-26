@@ -42,8 +42,9 @@ void StatusBar::setFieldDelimiter(const std::string &delimiter)
 std::string StatusBar::getText() const
 {
     std::stringstream result;
+    const std::string sep = "^pa(;0)" + fieldDelimiter;
     std::ostream_iterator<std::shared_ptr<Field>> outIt {
-        result, fieldDelimiter.c_str()
+        result, sep.c_str()
     };
 
     std::for_each(fields.begin(), fields.end(),
