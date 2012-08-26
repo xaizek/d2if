@@ -26,8 +26,8 @@
 int main(void)
 {
     StatusBar statusBar;
-    statusBar.addField(std::shared_ptr<Field> { new Time() });
-    statusBar.addField(std::shared_ptr<Field> { new Memory() });
+    statusBar.addField(std::make_shared<Time>());
+    statusBar.addField(std::make_shared<Memory>());
 
     Timer timer {
         [&]() {

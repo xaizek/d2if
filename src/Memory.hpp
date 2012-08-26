@@ -32,7 +32,7 @@ public:
     Memory(Memory &&rhs) = delete;
     Memory & operator=(Memory &&rhs) = delete;
 
-    virtual std::string getText() const override;
+    virtual void update() override;
 
 private:
     int getMemoryUsage() const;

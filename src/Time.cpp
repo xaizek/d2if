@@ -23,7 +23,7 @@
 
 std::string Time::FORMAT { "%Y.%m.%d %H:%M:%S" };
 
-std::string Time::getText() const
+void Time::update()
 {
     const std::time_t rawTime { std::time(nullptr) };
     const std::tm *timeInfo { std::localtime(&rawTime) };
@@ -34,5 +34,6 @@ std::string Time::getText() const
     if (std::strftime(buffer, sizeof(buffer), FORMAT.c_str(), timeInfo) > 0) {
         result << "^fg(white)" << buffer;
     }
-    return (result.str());
+
+    Time::setText(result.str());
 }

@@ -21,6 +21,16 @@
 #include <ostream>
 #include <string>
 
+std::string Field::getText() const
+{
+    return (text);
+}
+
+void Field::setText(const std::string &newText)
+{
+    text = newText;
+}
+
 std::ostream & operator<<(std::ostream &os, std::shared_ptr<Field> field)
 {
     return (os << field->getText());

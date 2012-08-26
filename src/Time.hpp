@@ -31,7 +31,7 @@ public:
     Time(Time &&rhs) = delete;
     Time & operator=(Time &&rhs) = delete;
 
-    virtual std::string getText() const override;
+    virtual void update() override;
 
 private:
     static std::string FORMAT;

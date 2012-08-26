@@ -25,7 +25,7 @@
 #include <string>
 #include <utility>
 
-std::string Memory::getText() const
+void Memory::update()
 {
     const std::string GRN = "#65A765";
     const std::string RED = "#FF0000";
@@ -42,14 +42,14 @@ std::string Memory::getText() const
            << "^fg(" << BAR << ")"
            << "^r(" << (100 - used) << "x10)";
 
-    return (result.str());
+    Field::setText(result.str());
 }
 
 int Memory::getMemoryUsage() const
 {
     std::ifstream meminfo("/proc/meminfo");
     if (!meminfo.is_open()) {
-        return -1;
+        return (-1);
     }
 
     int total, free, buffers, cached;

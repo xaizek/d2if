@@ -18,6 +18,7 @@
 #include "StatusBar.hpp"
 
 #include <algorithm>
+#include <functional>
 #include <iterator>
 #include <memory>
 #include <sstream>
@@ -44,6 +45,11 @@ std::string StatusBar::getText() const
     std::ostream_iterator<std::shared_ptr<Field>> outIt {
         result, fieldDelimiter.c_str()
     };
+
+    std::for_each(fields.begin(), fields.end(),
+                  [] (std::shared_ptr<Field> field) {
+                      field->update();
+                  });
 
     if (fields.size() > 1) {
         std::copy(fields.begin(), fields.end() - 1, outIt);

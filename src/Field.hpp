@@ -25,7 +25,14 @@
 class Field
 {
 public:
-    virtual std::string getText() const = 0;
+    virtual void update() = 0;
+    std::string getText() const;
+
+protected:
+    void setText(const std::string &newText);
+
+private:
+    std::string text;
 };
 
 std::ostream & operator<<(std::ostream &os, std::shared_ptr<Field> field);
