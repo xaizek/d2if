@@ -36,9 +36,9 @@ void Cpu::update()
     const std::string BAR = "#A6F09D";
 
     const cpuInfo current = getCpuUsage();
-    const long totalDiff = current.first - last.first;
-    const long idleDiff = current.second - last.second;
-    const long used = 100 - ((totalDiff != idleDiff) ? (idleDiff*100)/totalDiff : 100);
+    const long totalDiff = std::max(current.first - last.first, 1l);
+    const long idleDiff = std::max(current.second - last.second, 1l);
+    const long used = 100 - (idleDiff*100)/totalDiff;
 
     const std::string fgColor = (used >= 95) ? RED : GRN;
 
