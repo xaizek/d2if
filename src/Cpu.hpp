@@ -18,7 +18,6 @@
 #ifndef __CPU_HPP__
 #define __CPU_HPP__
 
-#include <string>
 #include <utility>
 
 #include "Field.hpp"
