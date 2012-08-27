@@ -35,3 +35,5 @@ std::ostream & operator<<(std::ostream &os, std::shared_ptr<Field> field)
 {
     return (os << field->getText());
 }
+
+// vim: set filetype=cpp.cpp11 :

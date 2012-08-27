@@ -45,3 +45,5 @@ int main(void)
 
     return (0);
 }
+
+// vim: set filetype=cpp.cpp11 :

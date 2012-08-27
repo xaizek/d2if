@@ -85,3 +85,5 @@ int Volume::getVolumeLevel() const
 
     return (100*(vol - min))/(max - min);
 }
+
+// vim: set filetype=cpp.cpp11 :

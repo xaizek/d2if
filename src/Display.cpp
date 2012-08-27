@@ -50,3 +50,5 @@ int Display::getDisplayBrightness() const
 
     return ((100*actualValue)/maxValue);
 }
+
+// vim: set filetype=cpp.cpp11 :

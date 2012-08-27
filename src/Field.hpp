@@ -38,3 +38,5 @@ private:
 std::ostream & operator<<(std::ostream &os, std::shared_ptr<Field> field);
 
 #endif // __FIELD_HPP__
+
+// vim: set filetype=cpp.cpp11 :

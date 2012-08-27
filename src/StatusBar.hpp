@@ -47,3 +47,5 @@ private:
 };
 
 #endif // __STATUSBAR_HPP__
+
+// vim: set filetype=cpp.cpp11 :

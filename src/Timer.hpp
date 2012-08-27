@@ -39,3 +39,5 @@ private:
 };
 
 #endif // __TIMER_HPP__
+
+// vim: set filetype=cpp.cpp11 :

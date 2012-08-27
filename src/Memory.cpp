@@ -64,3 +64,5 @@ int Memory::getMemoryUsage() const
 
     return (100 - ((free + buffers + cached)*100)/total);
 }
+
+// vim: set filetype=cpp.cpp11 :

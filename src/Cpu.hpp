@@ -41,3 +41,5 @@ private:
 };
 
 #endif // __CPU_HPP__
+
+// vim: set filetype=cpp.cpp11 :
