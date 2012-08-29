@@ -18,6 +18,8 @@
 #ifndef __VOLUME_HPP__
 #define __VOLUME_HPP__
 
+#include <utility>
+
 #include "Field.hpp"
 
 class Volume : public Field
@@ -32,7 +34,7 @@ public:
     virtual void update() override;
 
 private:
-    int getVolumeLevel() const;
+    std::pair<bool, int> getVolumeLevel() const;
 };
 
 #endif // __VOLUME_HPP__
