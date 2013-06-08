@@ -52,21 +52,25 @@ void StatusBar::setFieldDelimiterColor(const std::string &delimiterColor)
 
 std::string StatusBar::getText() const
 {
+    std::vector<Field*> visibleFields;
+    visibleFields.reserve(fields.size());
+
     for (const std::shared_ptr<Field> &field : fields) {
         field->update();
+        if (field->isVisible()) {
+            visibleFields.push_back(field.get());
+        }
     }
 
     std::ostringstream result;
     result << "^pa(2;0)";
 
-    std::ostream_iterator<std::shared_ptr<Field>> outIt {
-        result, sepCache.c_str()
-    };
-    if (fields.size() > 1) {
-        std::copy(fields.begin(), fields.end() - 1, outIt);
+    std::ostream_iterator<Field*> outIt { result, sepCache.c_str() };
+    if (visibleFields.size() > 1) {
+        std::copy(visibleFields.begin(), visibleFields.end() - 1, outIt);
     }
-    if (!fields.empty()) {
-        result << fields.back();
+    if (!visibleFields.empty()) {
+        result << visibleFields.back();
     }
 
     return (result.str());

@@ -30,12 +30,22 @@ const std::string & Field::getText() const
     return text;
 }
 
+bool Field::isVisible() const
+{
+    return visible;
+}
+
 void Field::setText(const std::string &newText)
 {
     text = newText;
 }
 
-std::ostream & operator<<(std::ostream &os, std::shared_ptr<Field> field)
+void Field::setVisible(bool newVisible)
+{
+    visible = newVisible;
+}
+
+std::ostream & operator<<(std::ostream &os, const Field *field)
 {
     return (os << field->getText());
 }

@@ -29,15 +29,18 @@ public:
 
     virtual void update() = 0;
     const std::string & getText() const;
+    bool isVisible() const;
 
 protected:
     void setText(const std::string &newText);
+    void setVisible(bool newVisible);
 
 private:
     std::string text;
+    bool visible = true;
 };
 
-std::ostream & operator<<(std::ostream &os, std::shared_ptr<Field> field);
+std::ostream & operator<<(std::ostream &os, const Field *field);
 
 #endif // __FIELD_HPP__
 
