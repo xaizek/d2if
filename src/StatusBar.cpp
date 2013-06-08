@@ -37,11 +37,13 @@ void StatusBar::addField(std::shared_ptr<Field> field)
 void StatusBar::setFieldDelimiter(const std::string &delimiter)
 {
     fieldDelimiter = delimiter;
+    sepCache = "^pa(;0)" + colorCache + fieldDelimiter;
 }
 
 void StatusBar::setFieldDelimiterColor(const std::string &delimiterColor)
 {
     fieldDelimiterColor = delimiterColor;
+    colorCache = "^fg(" + fieldDelimiterColor + ")";
 }
 
 std::string StatusBar::getText() const
@@ -54,11 +56,8 @@ std::string StatusBar::getText() const
     std::ostringstream result;
     result << "^pa(2;0)";
 
-    const std::string color = "^fg(" + fieldDelimiterColor + ")";
-    const std::string sep = "^pa(;0)" + color + fieldDelimiter;
-
     std::ostream_iterator<std::shared_ptr<Field>> outIt {
-        result, sep.c_str()
+        result, sepCache.c_str()
     };
     if (fields.size() > 1) {
         std::copy(fields.begin(), fields.end() - 1, outIt);

@@ -44,6 +44,8 @@ private:
     std::vector<std::shared_ptr<Field>> fields;
     std::string fieldDelimiter = " | ";
     std::string fieldDelimiterColor = "white";
+    std::string colorCache = "^fg(white)";
+    std::string sepCache = "^pa(;0)^fg(white) | ";
 };
 
 #endif // __STATUSBAR_HPP__
