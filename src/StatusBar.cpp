@@ -47,10 +47,9 @@ void StatusBar::setFieldDelimiterColor(const std::string &delimiterColor)
 
 std::string StatusBar::getText() const
 {
-    std::for_each(fields.begin(), fields.end(),
-                  [] (std::shared_ptr<Field> field) {
-                      field->update();
-                  });
+    for (const std::shared_ptr<Field> &field : fields) {
+        field->update();
+    }
 
     std::ostringstream result;
     result << "^pa(2;0)";
