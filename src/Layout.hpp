@@ -19,7 +19,7 @@
 #define __LAYOUT_HPP__
 
 #include "Field.hpp"
-#include "XKeyboard.h"
+#include "XKeyboard.hpp"
 
 class Layout : public Field
 {

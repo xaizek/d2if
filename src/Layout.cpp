@@ -17,7 +17,7 @@
 
 #include "Layout.hpp"
 
-#include "XKeyboard.h"
+#include "XKeyboard.hpp"
 
 void Layout::update()
 {
