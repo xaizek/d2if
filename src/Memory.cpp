@@ -34,7 +34,7 @@ void Memory::update()
     const int used = getMemoryUsage();
     const std::string fgColor = (used >= 95) ? RED : GRN;
 
-    std::stringstream result;
+    std::ostringstream result;
 
     result << "^fg(white)MEM:"
            << "^p(2;3)"

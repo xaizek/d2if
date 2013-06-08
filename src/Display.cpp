@@ -27,7 +27,7 @@ void Display::update()
 
     const int actual = getDisplayBrightness();
 
-    std::stringstream result;
+    std::ostringstream result;
 
     result << "^fg(white)DB: "
            << "^fg(" << BAR << ")"

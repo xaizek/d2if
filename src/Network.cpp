@@ -37,7 +37,7 @@ Network::Network()
 
 void Network::update()
 {
-    std::stringstream result;
+    std::ostringstream result;
 
     const Network::ifaceList ifaces = getIfacesInfo();
     for (const std::pair<std::string, ifaceInfo> &iface : ifaces) {

@@ -28,7 +28,7 @@ void Time::update()
     const std::time_t rawTime { std::time(nullptr) };
     const std::tm *timeInfo { std::localtime(&rawTime) };
 
-    std::stringstream result;
+    std::ostringstream result;
 
     char buffer[80];
     if (std::strftime(buffer, sizeof(buffer), FORMAT.c_str(), timeInfo) > 0) {

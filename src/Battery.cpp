@@ -34,7 +34,7 @@ void Battery::update()
 
     const std::string fgColor = charging ? GRN : RED;
 
-    std::stringstream result;
+    std::ostringstream result;
 
     result << "^fg(white)BAT:"
            << "^p(2;3)"

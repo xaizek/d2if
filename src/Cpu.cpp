@@ -42,7 +42,7 @@ void Cpu::update()
 
     const std::string fgColor = (used >= 95) ? RED : GRN;
 
-    std::stringstream result;
+    std::ostringstream result;
 
     result << "^fg(white)CPU:"
            << "^p(2;3)"

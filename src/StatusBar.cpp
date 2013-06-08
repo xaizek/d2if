@@ -51,7 +51,7 @@ std::string StatusBar::getText() const
                       field->update();
                   });
 
-    std::stringstream result;
+    std::ostringstream result;
     result << "^pa(2;0)";
 
     const std::string color = "^fg(" + fieldDelimiterColor + ")";

@@ -28,7 +28,7 @@ void Volume::update()
 
     const std::pair<bool, int> state = getVolumeLevel();
 
-    std::stringstream result;
+    std::ostringstream result;
 
     result << "^fg(white)A: "
            << "^fg(" << (state.first ? BAR : "black") << ")"
