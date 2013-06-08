@@ -18,5 +18,6 @@ run: $(PROJECT_NAME)
 
 clear:
 	-$(RM) *.o *.d
+	-$(RM) $(PROJECT_NAME)
 
 include $(wildcard *.d)
