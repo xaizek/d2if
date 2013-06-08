@@ -24,61 +24,65 @@
 
 void Battery::update()
 {
-    const std::string GRN = "#65A765";
-    const std::string RED = "#FF0000";
-    const std::string BAR = "#A6F09D";
+    static const std::string GRN = "#65A765";
+    static const std::string RED = "#FF0000";
+    static const std::string BAR = "#A6F09D";
 
     const std::pair<bool, int> state = getBatteryState();
     const bool charging = state.first;
     const int remaining = state.second;
 
-    const std::string fgColor = charging ? GRN : RED;
+    const bool visible = remaining >= 0;
+    Field::setVisible(visible);
 
-    std::ostringstream result;
+    if (visible) {
+        const std::string &fgColor = charging ? GRN : RED;
 
-    result << "^fg(white)BAT:"
-           << "^p(2;3)"
-           << "^fg(" << BAR << ")"
-           << "^r(" << remaining << "x10)"
-           << "^fg(" << fgColor << ")"
-           << "^r(" << (100 - remaining) << "x10)";
+        std::ostringstream result;
 
-    Field::setText(result.str());
+        result << "^fg(white)BAT:"
+               << "^p(2;3)"
+               << "^fg(" << BAR << ")"
+               << "^r(" << remaining << "x10)"
+               << "^fg(" << fgColor << ")"
+               << "^r(" << (100 - remaining) << "x10)";
+
+        Field::setText(result.str());
+    }
 }
 
 std::pair<bool, int> Battery::getBatteryState() const
 {
-    std::ifstream info("/proc/acpi/battery/BAT0/info");
+    std::ifstream info { "/proc/acpi/battery/BAT0/info" };
+    std::ifstream state { "/proc/acpi/battery/BAT0/state" };
 
-    info.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    info.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    info.ignore(std::numeric_limits<std::streamsize>::max(), ':');
+    if (info.is_open() && state.is_open()) {
+        static const auto max = std::numeric_limits<std::streamsize>::max();
 
-    int full;
-    info >> full;
+        int full;
+        std::string charged;
+        int remaining;
 
-    info.close();
+        info.ignore(max, '\n')
+            .ignore(max, '\n')
+            .ignore(max, ':')
+            >> full;
 
-    std::ifstream state("/proc/acpi/battery/BAT0/state");
+        state.ignore(max, '\n')
+             .ignore(max, '\n')
+             .ignore(max, ':')
+             >> charged;
 
-    state.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    state.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    state.ignore(std::numeric_limits<std::streamsize>::max(), ':');
+        state.ignore(max, ':')
+            .ignore(max, ':')
+            >> remaining;
 
-    std::string charged;
-    state >> charged;
-
-    state.ignore(std::numeric_limits<std::streamsize>::max(), ':');
-    state.ignore(std::numeric_limits<std::streamsize>::max(), ':');
-
-    int remaining;
-    state >> remaining;
-
-    state.close();
-
-    return {
-        charged == "charged" || charged == "charging", (remaining*100)/full
-    };
+        return {
+            charged == "charged" || charged == "charging", (remaining*100)/full
+        };
+    } else {
+        return { false, -1 };
+    }
 }
 
 // vim: set filetype=cpp.cpp11 :
