@@ -23,32 +23,41 @@
 
 void Display::update()
 {
-    const std::string BAR = "#A6F09D";
+    const int actual { getDisplayBrightness() };
+    const bool visible { actual >= 0 };
+    Field::setVisible(visible);
+    if (visible) {
+        static const std::string BAR { "#A6F09D" };
 
-    const int actual = getDisplayBrightness();
+        std::ostringstream result;
 
-    std::ostringstream result;
+        result << "^fg(white)DB: "
+               << "^fg(" << BAR << ")"
+               << actual << "%";
 
-    result << "^fg(white)DB: "
-           << "^fg(" << BAR << ")"
-           << actual << "%";
-
-    Field::setText(result.str());
+        Field::setText(result.str());
+    }
 }
 
 int Display::getDisplayBrightness() const
 {
-    int maxValue;
-    std::ifstream max("/sys/class/backlight/acpi_video0/max_brightness");
-    max >> maxValue;
-    max.close();
+    std::ifstream max {
+        "/sys/class/backlight/acpi_video0/max_brightness"
+    };
+    std::ifstream actual {
+        "/sys/class/backlight/acpi_video0/actual_brightness"
+    };
+    if (max.is_open() && actual.is_open()) {
+        int maxValue;
+        max >> maxValue;
 
-    int actualValue;
-    std::ifstream actual("/sys/class/backlight/acpi_video0/actual_brightness");
-    actual >> actualValue;
-    actual.close();
+        int actualValue;
+        actual >> actualValue;
 
-    return ((100*actualValue)/maxValue);
+        return ((100*actualValue)/maxValue);
+    } else {
+        return -1;
+    }
 }
 
 // vim: set filetype=cpp.cpp11 :
