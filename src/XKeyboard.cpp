@@ -13,6 +13,7 @@
 #include <X11/XKBlib.h>
 #include <X11/Xlib.h>
 
+#include <cstddef>
 #include <cstdlib>
 #include <cctype>
 #include <cstring>
@@ -237,6 +238,11 @@ int XKeyboard::currentGroupNum() const
     XkbStateRec xkbState;
     XkbGetState(_display, _deviceId, &xkbState);
     return static_cast<int>(xkbState.group);
+}
+
+std::size_t XKeyboard::getGroupCount() const
+{
+    return static_cast<std::size_t>(_groupNames.size());
 }
 
 const std::string & XKeyboard::getCurrentGroupSymbol() const

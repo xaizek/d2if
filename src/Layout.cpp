@@ -21,7 +21,11 @@
 
 void Layout::update()
 {
-    Field::setText(kbd.currentGroupSymbol());
+    const bool visible = kbd.getGroupCount() > 1;
+    Field::setVisible(visible);
+    if (visible) {
+        Field::setText(kbd.getCurrentGroupSymbol());
+    }
 }
 
 // vim: set filetype=cpp.cpp11 :

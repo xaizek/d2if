@@ -11,6 +11,8 @@
 #ifndef XKEYBOARD_HPP
 #define XKEYBOARD_HPP
 
+#include <cstddef>
+
 #include <string>
 #include <vector>
 
@@ -23,6 +25,7 @@ public:
     XKeyboard();
     ~XKeyboard();
 
+    std::size_t getGroupCount() const;
     const std::string & getCurrentGroupSymbol() const;
 
 private:
