@@ -18,6 +18,7 @@
 #ifndef __STATUSBAR_HPP__
 #define __STATUSBAR_HPP__
 
+#include <initializer_list>
 #include <string>
 #include <memory>
 #include <vector>
@@ -27,7 +28,7 @@
 class StatusBar
 {
 public:
-    StatusBar() = default;
+    StatusBar(std::initializer_list<std::shared_ptr<Field>> fields);
 
     // These operations are forbidden.
     StatusBar(StatusBar &&rhs) = delete;

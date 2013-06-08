@@ -28,6 +28,11 @@
 
 #include "Field.hpp"
 
+StatusBar::StatusBar(std::initializer_list<std::shared_ptr<Field>> fields)
+    :fields(fields.begin(), fields.end())
+{
+}
+
 void StatusBar::addField(std::shared_ptr<Field> field)
 {
     fields.push_back(field);

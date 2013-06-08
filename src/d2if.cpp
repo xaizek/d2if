@@ -31,15 +31,16 @@
 
 int main(void)
 {
-    StatusBar statusBar;
-    statusBar.addField(std::make_shared<Time>());
-    statusBar.addField(std::make_shared<Layout>());
-    statusBar.addField(std::make_shared<Memory>());
-    statusBar.addField(std::make_shared<Cpu>());
-    statusBar.addField(std::make_shared<Display>());
-    statusBar.addField(std::make_shared<Volume>());
-    statusBar.addField(std::make_shared<Battery>());
-    statusBar.addField(std::make_shared<Network>());
+    StatusBar statusBar = {
+        std::make_shared<Time>(),
+        std::make_shared<Layout>(),
+        std::make_shared<Memory>(),
+        std::make_shared<Cpu>(),
+        std::make_shared<Display>(),
+        std::make_shared<Volume>(),
+        std::make_shared<Battery>(),
+        std::make_shared<Network>(),
+    };
 
     Timer timer {
         [&]() {
