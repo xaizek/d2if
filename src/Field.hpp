@@ -25,6 +25,8 @@
 class Field
 {
 public:
+    virtual ~Field();
+
     virtual void update() = 0;
     const std::string & getText() const;
 

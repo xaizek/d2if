@@ -21,6 +21,10 @@
 #include <ostream>
 #include <string>
 
+Field::~Field()
+{
+}
+
 const std::string & Field::getText() const
 {
     return text;
