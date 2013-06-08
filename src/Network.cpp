@@ -77,37 +77,39 @@ void Network::update()
 
 Network::ifaceList Network::getIfacesInfo() const
 {
+    static const std::string prefix { "/sys/class/net/" };
+    static const std::string stateSuffix { "/operstate" };
+    static const std::string upState { "up" };
+    static const std::string rxSuffix { "/statistics/rx_bytes" };
+    static const std::string txSuffix { "/statistics/tx_bytes" };
+
     const IfacesHead head = getIfacesHead();
 
     Network::ifaceList result;
     const ifaddrs *runner = head.get();
     while ((runner = runner->ifa_next) != nullptr) {
-        const std::string path {
-            std::string("/sys/class/net/") + runner->ifa_name + "/operstate"
-        };
+        const std::string name { runner->ifa_name };
+        const std::string &basePath { prefix + name };
+        const std::string &path { basePath + stateSuffix };
 
-        const std::string state { readFromFile<std::string>(path) };
+        const std::string &state { readFromFile<std::string>(path) };
 
-        if (state == "up") {
+        if (state == upState) {
             if (runner->ifa_addr->sa_family == AF_INET) {
-                const auto p = result.find(runner->ifa_name);
+                const auto p = result.find(name);
                 if (p != result.end()) {
                     result.erase(p);
                 }
 
-                const std::string rxPath {
-                    std::string("/sys/class/net/") + runner->ifa_name + "/statistics/rx_bytes"
-                };
+                const std::string &rxPath { basePath + rxSuffix };
                 const long rx { readFromFile<long>(rxPath) };
 
-                const std::string txPath {
-                    std::string("/sys/class/net/") + runner->ifa_name + "/statistics/tx_bytes"
-                };
+                const std::string &txPath { basePath + txSuffix };
                 const long tx { readFromFile<long>(txPath) };
 
-                result.insert({runner->ifa_name, ifaceInfo{runner->ifa_name, true, rx, tx}});
-            } else if (result.find(runner->ifa_name) == result.end()) {
-                result.insert({runner->ifa_name, ifaceInfo{runner->ifa_name, false, 0, 0}});
+                result.insert({name, ifaceInfo{name, true, rx, tx}});
+            } else if (result.find(name) == result.end()) {
+                result.insert({name, ifaceInfo{name, false, 0, 0}});
             }
         }
     }
