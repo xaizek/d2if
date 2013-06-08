@@ -239,7 +239,7 @@ int XKeyboard::currentGroupNum() const
     return static_cast<int>(xkbState.group);
 }
 
-std::string XKeyboard::currentGroupSymbol() const
+const std::string & XKeyboard::getCurrentGroupSymbol() const
 {
     return _symbolNames[currentGroupNum()];
 }

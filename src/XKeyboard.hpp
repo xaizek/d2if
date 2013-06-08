@@ -23,7 +23,7 @@ public:
     XKeyboard();
     ~XKeyboard();
 
-    std::string currentGroupSymbol() const;
+    const std::string & getCurrentGroupSymbol() const;
 
 private:
     typedef std::vector<std::string> StringVector;
