@@ -60,7 +60,7 @@ std::string StatusBar::getText() const
     if (fields.size() > 1) {
         std::copy(fields.begin(), fields.end() - 1, outIt);
     }
-    if (fields.size() > 0) {
+    if (!fields.empty()) {
         result << fields.back();
     }
 
