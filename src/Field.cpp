@@ -21,9 +21,9 @@
 #include <ostream>
 #include <string>
 
-std::string Field::getText() const
+const std::string & Field::getText() const
 {
-    return (text);
+    return text;
 }
 
 void Field::setText(const std::string &newText)

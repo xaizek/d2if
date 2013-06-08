@@ -26,7 +26,7 @@ class Field
 {
 public:
     virtual void update() = 0;
-    std::string getText() const;
+    const std::string & getText() const;
 
 protected:
     void setText(const std::string &newText);
