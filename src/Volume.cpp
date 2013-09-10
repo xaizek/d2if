@@ -24,14 +24,12 @@
 
 void Volume::update()
 {
-    const std::string BAR = "#A6F09D";
-
     const std::pair<bool, int> state = getVolumeLevel();
 
     std::ostringstream result;
 
     result << "^fg(white)A: "
-           << "^fg(" << (state.first ? BAR : "black") << ")"
+           << "^fg(" << (state.first ? "white" : "black") << ")"
            << ((state.second < 0) ? "XX" : std::to_string(state.second)) << "%";
 
     Field::setText(result.str());
