@@ -21,7 +21,7 @@
 
 void Layout::update()
 {
-    const bool visible = kbd.getGroupCount() > 1;
+    const bool visible { kbd.getGroupCount() > 1 };
     Field::setVisible(visible);
     if (visible) {
         Field::setText(kbd.getCurrentGroupSymbol());

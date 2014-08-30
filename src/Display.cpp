@@ -27,12 +27,9 @@ void Display::update()
     const bool visible { actual >= 0 };
     Field::setVisible(visible);
     if (visible) {
-        static const std::string BAR { "#A6F09D" };
-
         std::ostringstream result;
 
-        result << "^fg(white)DB: "
-               << "^fg(" << BAR << ")"
+        result << "DB: "
                << actual << "%";
 
         Field::setText(result.str());

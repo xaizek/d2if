@@ -27,20 +27,26 @@
 
 void Memory::update()
 {
-    const std::string GRN = "#65A765";
-    const std::string RED = "#FF0000";
-    const std::string BAR = "#A6F09D";
+    static const std::string fgBarColor {
+        "^fg(" + getColor("fg-bar") + ")"
+    };
+    static const std::string fgGoodColor {
+        "^fg(" + getColor("fg-bar-good") + ")"
+    };
+    static const std::string fgBadColor {
+        "^fg(" + getColor("fg-bar-bad") + ")"
+    };
 
-    const int used = getMemoryUsage();
-    const std::string fgColor = (used >= 95) ? RED : GRN;
+    const int used { getMemoryUsage() };
+    const std::string &fgColor { (used >= 95) ? fgBadColor : fgGoodColor };
 
     std::ostringstream result;
 
-    result << "^fg(white)MEM:"
+    result << "MEM:"
            << "^p(2;3)"
-           << "^fg(" << fgColor << ")"
+           << fgColor
            << "^r(" << used << "x10)"
-           << "^fg(" << BAR << ")"
+           << fgBarColor
            << "^r(" << (100 - used) << "x10)";
 
     Field::setText(result.str());

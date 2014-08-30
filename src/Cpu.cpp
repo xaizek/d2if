@@ -24,31 +24,38 @@
 #include <string>
 #include <iostream>
 
-Cpu::Cpu()
+Cpu::Cpu(const ColorScheme& colorScheme)
+    : Field(colorScheme)
 {
     last = getCpuUsage();
 }
 
 void Cpu::update()
 {
-    const std::string GRN = "#65A765";
-    const std::string RED = "#FF0000";
-    const std::string BAR = "#A6F09D";
+    static const std::string fgBarColor {
+        "^fg(" + getColor("fg-bar") + ")"
+    };
+    static const std::string fgGoodColor {
+        "^fg(" + getColor("fg-bar-good") + ")"
+    };
+    static const std::string fgBadColor {
+        "^fg(" + getColor("fg-bar-bad") + ")"
+    };
 
-    const cpuInfo current = getCpuUsage();
-    const long totalDiff = std::max(current.first - last.first, 1l);
-    const long idleDiff = std::max(current.second - last.second, 1l);
-    const long used = 100 - (idleDiff*100)/totalDiff;
+    const cpuInfo current { getCpuUsage() };
+    const long totalDiff { std::max(current.first - last.first, 1l) };
+    const long idleDiff { std::max(current.second - last.second, 1l) };
+    const long used { 100 - (idleDiff*100)/totalDiff };
 
-    const std::string fgColor = (used >= 95) ? RED : GRN;
+    const std::string &fgColor { (used >= 95) ? fgBadColor : fgGoodColor };
 
     std::ostringstream result;
 
     result << "^fg(white)CPU:"
            << "^p(2;3)"
-           << "^fg(" << fgColor << ")"
+           << fgColor
            << "^r(" << used << "x10)"
-           << "^fg(" << BAR << ")"
+           << fgBarColor
            << "^r(" << (100 - used) << "x10)";
 
     Field::setText(result.str());
@@ -58,9 +65,9 @@ void Cpu::update()
 
 Cpu::cpuInfo Cpu::getCpuUsage() const
 {
-    std::ifstream stat("/proc/stat");
+    std::ifstream stat { "/proc/stat" };
     if (!stat.is_open()) {
-        return {-1, -1};
+        return { -1, -1 };
     }
 
     long user, nice, system, idle;
@@ -70,7 +77,7 @@ Cpu::cpuInfo Cpu::getCpuUsage() const
 
     stat.close();
 
-    return {user + nice + system + idle, idle};
+    return { user + nice + system + idle, idle };
 }
 
 // vim: set filetype=cpp.cpp11 :

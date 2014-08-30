@@ -24,9 +24,15 @@
 
 void Battery::update()
 {
-    static const std::string GRN = "#65A765";
-    static const std::string RED = "#FF0000";
-    static const std::string BAR = "#A6F09D";
+    static const std::string fgBarColor {
+        "^fg(" + getColor("fg-bar") + ")"
+    };
+    static const std::string fgGoodColor {
+        "^fg(" + getColor("fg-bar-good") + ")"
+    };
+    static const std::string fgBadColor {
+        "^fg(" + getColor("fg-bar-bad") + ")"
+    };
 
     const std::pair<bool, int> state = getBatteryState();
     const bool charging = state.first;
@@ -36,15 +42,15 @@ void Battery::update()
     Field::setVisible(visible);
 
     if (visible) {
-        const std::string &fgColor = charging ? GRN : RED;
+        const std::string &fgColor = charging ? fgGoodColor : fgBadColor;
 
         std::ostringstream result;
 
         result << "^fg(white)BAT:"
                << "^p(2;3)"
-               << "^fg(" << BAR << ")"
+               << fgBarColor
                << "^r(" << remaining << "x10)"
-               << "^fg(" << fgColor << ")"
+               << fgColor
                << "^r(" << (100 - remaining) << "x10)";
 
         Field::setText(result.str());

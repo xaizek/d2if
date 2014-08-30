@@ -22,10 +22,12 @@
 
 #include "Field.hpp"
 
+class ColorScheme;
+
 class Cpu : public Field
 {
 public:
-    Cpu();
+    Cpu(const ColorScheme& colorScheme);
 
     virtual void update() override;
 

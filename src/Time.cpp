@@ -25,6 +25,8 @@ std::string Time::FORMAT { "%Y.%m.%d %H:%M:%S" };
 
 void Time::update()
 {
+    static const std::string fgColor { "^fg(" + getColor("fg") + ")" };
+
     const std::time_t rawTime { std::time(nullptr) };
     const std::tm *timeInfo { std::localtime(&rawTime) };
 
@@ -32,7 +34,7 @@ void Time::update()
 
     char buffer[80];
     if (std::strftime(buffer, sizeof(buffer), FORMAT.c_str(), timeInfo) > 0) {
-        result << "^fg(white)" << buffer;
+        result << fgColor << buffer;
     }
 
     Time::setText(result.str());

@@ -21,6 +21,13 @@
 #include <ostream>
 #include <string>
 
+#include "ColorScheme.hpp"
+
+Field::Field(const ColorScheme& colorScheme)
+    : colorScheme(colorScheme)
+{
+}
+
 Field::~Field()
 {
 }
@@ -43,6 +50,11 @@ void Field::setText(const std::string &newText)
 void Field::setVisible(bool newVisible)
 {
     visible = newVisible;
+}
+
+std::string Field::getColor(const std::string &element) const
+{
+    return colorScheme.getColor(element);
 }
 
 std::ostream & operator<<(std::ostream &os, const Field *field)

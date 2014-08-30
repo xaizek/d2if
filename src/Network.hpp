@@ -26,10 +26,12 @@
 
 struct ifaddrs;
 
+class ColorScheme;
+
 class Network : public Field
 {
 public:
-    Network();
+    Network(const ColorScheme& colorScheme);
 
     virtual void update() override;
 

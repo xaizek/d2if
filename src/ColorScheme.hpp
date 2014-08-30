@@ -1,5 +1,5 @@
 // d2if
-// Copyright (C) 2012 xaizek.
+// Copyright (C) 2012-2013 xaizek.
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,42 +15,32 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
-#ifndef __FIELD_HPP__
-#define __FIELD_HPP__
+#ifndef __COLORSCHEME_HPP__
+#define __COLORSCHEME_HPP__
 
-#include <iosfwd>
-#include <memory>
+#include <map>
 #include <string>
 
-class ColorScheme;
-
-class Field
+class ColorScheme
 {
+    typedef std::map<std::string, std::string> colors_t;
+
 public:
-    Field(const ColorScheme& colorScheme);
-    virtual ~Field();
+    ColorScheme(colors_t &&colors);
 
     // These operations are forbidden.
-    Field(Field &rhs) = delete;
-    Field & operator=(Field &rhs) = delete;
+    ColorScheme(ColorScheme &rhs) = delete;
+    ColorScheme & operator=(ColorScheme &rhs) = delete;
 
-    virtual void update() = 0;
-    const std::string & getText() const;
-    bool isVisible() const;
-
-protected:
-    void setText(const std::string &newText);
-    void setVisible(bool newVisible);
     std::string getColor(const std::string &element) const;
 
 private:
-    std::string text;
-    bool visible = true;
-    const ColorScheme& colorScheme;
+    colors_t::const_iterator findColor(const std::string &element) const;
+
+private:
+    colors_t colors;
 };
 
-std::ostream & operator<<(std::ostream &os, const Field *field);
-
-#endif // __FIELD_HPP__
+#endif // __COLORSCHEME_HPP__
 
 // vim: set filetype=cpp.cpp11 :

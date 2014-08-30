@@ -24,12 +24,15 @@
 
 void Volume::update()
 {
-    const std::pair<bool, int> state = getVolumeLevel();
+    static const std::string fgBadColor { "^fg(" + getColor("fg-bad") + ")" };
+    static const std::string fgGoodColor { "^fg(" + getColor("fg-good") + ")" };
+
+    const std::pair<bool, int> &state { getVolumeLevel() };
 
     std::ostringstream result;
 
-    result << "^fg(white)A: "
-           << "^fg(" << (state.first ? "white" : "black") << ")"
+    result << "A: "
+           << (state.first ? fgGoodColor : fgBadColor)
            << ((state.second < 0) ? "XX" : std::to_string(state.second)) << "%";
 
     Field::setText(result.str());

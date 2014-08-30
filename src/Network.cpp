@@ -30,16 +30,21 @@
 template<class T>
 T readFromFile(const std::string &filename);
 
-Network::Network()
+Network::Network(const ColorScheme& colorScheme)
+    : Field { colorScheme }
+    , last { getIfacesInfo() }
 {
-    last = getIfacesInfo();
 }
 
 void Network::update()
 {
+    static const std::string fgColor { "^fg(" + getColor("fg") + ")" };
+    static const std::string fgGoodColor { "^fg(" + getColor("fg-good") + ")" };
+    static const std::string fgBadColor { "^fg(" + getColor("fg-bad") + ")" };
+
     std::ostringstream result;
 
-    const Network::ifaceList ifaces = getIfacesInfo();
+    const Network::ifaceList &ifaces { getIfacesInfo() };
     for (const std::pair<std::string, ifaceInfo> &iface : ifaces) {
         const auto prevIt = last.find(iface.first);
         const ifaceInfo prev {
@@ -52,14 +57,12 @@ void Network::update()
         const long rx { (std::get<2>(iface.second) - std::get<2>(prev))/1024 };
         const long tx { (std::get<3>(iface.second) - std::get<3>(prev))/1024 };
 
-        const std::string fgColor {
-            std::get<1>(iface.second)
-                ? "^fg(white)"
-                : "^fg(black)"
+        const std::string &speedColor {
+            std::get<1>(iface.second) ? fgGoodColor : fgBadColor
         };
 
-        result << "^fg(white)" << std::get<0>(iface.second) << ": "
-               << fgColor
+        result << fgColor << std::get<0>(iface.second) << ": "
+               << speedColor
                << std::setw(3) << rx << " k↓ "
                << std::setw(3) << tx << " k↑";
     }

@@ -19,6 +19,7 @@
 #include <iostream>
 
 #include "Battery.hpp"
+#include "ColorScheme.hpp"
 #include "Cpu.hpp"
 #include "Display.hpp"
 #include "Layout.hpp"
@@ -31,19 +32,30 @@
 
 int main(void)
 {
+    const ColorScheme colorScheme = {
+        {
+            { "bg",          "black"   },
+            { "fg",          "white"   },
+            { "fg-bad",      "black"   },
+            { "fg-bar",      "#A6F09D" },
+            { "fg-bar-good", "#65A765" },
+            { "fg-bar-bad",  "#FF0000" },
+        }
+    };
+
     StatusBar statusBar = {
-        std::make_shared<Time>(),
-        std::make_shared<Layout>(),
-        std::make_shared<Memory>(),
-        std::make_shared<Cpu>(),
-        std::make_shared<Display>(),
-        std::make_shared<Volume>(),
-        std::make_shared<Battery>(),
-        std::make_shared<Network>(),
+        std::make_shared<Time>(colorScheme),
+        std::make_shared<Layout>(colorScheme),
+        std::make_shared<Memory>(colorScheme),
+        std::make_shared<Cpu>(colorScheme),
+        std::make_shared<Display>(colorScheme),
+        std::make_shared<Volume>(colorScheme),
+        std::make_shared<Battery>(colorScheme),
+        std::make_shared<Network>(colorScheme),
     };
 
     statusBar.setFieldDelimiter(" | ");
-    statusBar.setFieldDelimiterColor("white");
+    statusBar.setFieldDelimiterColor(colorScheme.getColor("fg"));
 
     Timer timer {
         [&]() {
