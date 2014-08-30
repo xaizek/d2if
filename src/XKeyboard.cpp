@@ -33,7 +33,7 @@ XKeyboard::XKeyboard()
 
     XkbIgnoreExtension(False);
 
-    char* displayName = strdup("");
+    char* displayName = getenv("DISPLAY");
     int eventCode;
     int errorReturn;
     int major = XkbMajorVersion;
