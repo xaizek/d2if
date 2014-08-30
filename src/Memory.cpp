@@ -19,6 +19,8 @@
 
 #include <unistd.h>
 
+#include <cassert>
+
 #include <fstream>
 #include <limits>
 #include <sstream>
@@ -59,16 +61,24 @@ int Memory::getMemoryUsage() const
         return (-1);
     }
 
-    int total, free, buffers, cached;
+    int total, free, avail, buffers, cached;
 
     meminfo.ignore(std::numeric_limits<std::streamsize>::max(), ':') >> total;
     meminfo.ignore(std::numeric_limits<std::streamsize>::max(), ':') >> free;
+    meminfo.ignore(std::numeric_limits<std::streamsize>::max(), ':') >> avail;
     meminfo.ignore(std::numeric_limits<std::streamsize>::max(), ':') >> buffers;
     meminfo.ignore(std::numeric_limits<std::streamsize>::max(), ':') >> cached;
 
     meminfo.close();
 
-    return (100 - ((free + buffers + cached)*100)/total);
+    const int usage {
+        100 - ((free + buffers + cached)*100)/total
+    };
+
+    assert(usage >= 0 && "Usage can't be negative.");
+    assert(usage <= 100 && "Usage can't be greater than 100%.");
+
+    return usage;
 }
 
 // vim: set filetype=cpp.cpp11 :
