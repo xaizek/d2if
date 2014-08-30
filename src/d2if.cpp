@@ -15,6 +15,8 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
+#include <cstdlib>
+
 #include <chrono>
 #include <iostream>
 
@@ -65,7 +67,7 @@ int main(void)
 
     timer.run(std::chrono::seconds(1));
 
-    return (0);
+    return EXIT_SUCCESS;
 }
 
 // vim: set filetype=cpp.cpp11 :
