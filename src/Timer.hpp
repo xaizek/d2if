@@ -29,8 +29,8 @@ public:
     Timer(handler_t handler);
 
     // These operations are forbidden.
-    Timer(Timer &&rhs) = delete;
-    Timer & operator=(Timer &&rhs) = delete;
+    Timer(Timer &rhs) = delete;
+    Timer & operator=(Timer &rhs) = delete;
 
     void run(std::chrono::milliseconds period);
 

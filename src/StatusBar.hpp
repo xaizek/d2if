@@ -31,8 +31,8 @@ public:
     StatusBar(std::initializer_list<std::shared_ptr<Field>> fields);
 
     // These operations are forbidden.
-    StatusBar(StatusBar &&rhs) = delete;
-    StatusBar & operator=(StatusBar &&rhs) = delete;
+    StatusBar(StatusBar &rhs) = delete;
+    StatusBar & operator=(StatusBar &rhs) = delete;
 
     void addField(std::shared_ptr<Field> field);
 

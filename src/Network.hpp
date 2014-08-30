@@ -31,10 +31,6 @@ class Network : public Field
 public:
     Network();
 
-    // These operations are forbidden.
-    Network(Network &&rhs) = delete;
-    Network & operator=(Network &&rhs) = delete;
-
     virtual void update() override;
 
 private:

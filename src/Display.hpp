@@ -25,10 +25,6 @@ class Display : public Field
 public:
     Display() = default;
 
-    // These operations are forbidden.
-    Display(Display &&rhs) = delete;
-    Display & operator=(Display &&rhs) = delete;
-
     virtual void update() override;
 
 private:

@@ -27,10 +27,6 @@ class Volume : public Field
 public:
     Volume() = default;
 
-    // These operations are forbidden.
-    Volume(Volume &&rhs) = delete;
-    Volume & operator=(Volume &&rhs) = delete;
-
     virtual void update() override;
 
 private:

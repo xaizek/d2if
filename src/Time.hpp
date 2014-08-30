@@ -27,10 +27,6 @@ class Time : public Field
 public:
     Time() = default;
 
-    // These operations are forbidden.
-    Time(Time &&rhs) = delete;
-    Time & operator=(Time &&rhs) = delete;
-
     virtual void update() override;
 
 private:

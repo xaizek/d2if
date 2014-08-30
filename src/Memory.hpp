@@ -25,10 +25,6 @@ class Memory : public Field
 public:
     Memory() = default;
 
-    // These operations are forbidden.
-    Memory(Memory &&rhs) = delete;
-    Memory & operator=(Memory &&rhs) = delete;
-
     virtual void update() override;
 
 private:

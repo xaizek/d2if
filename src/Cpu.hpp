@@ -27,10 +27,6 @@ class Cpu : public Field
 public:
     Cpu();
 
-    // These operations are forbidden.
-    Cpu(Cpu &&rhs) = delete;
-    Cpu & operator=(Cpu &&rhs) = delete;
-
     virtual void update() override;
 
 private:

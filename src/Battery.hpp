@@ -27,10 +27,6 @@ class Battery : public Field
 public:
     Battery() = default;
 
-    // These operations are forbidden.
-    Battery(Battery &&rhs) = delete;
-    Battery & operator=(Battery &&rhs) = delete;
-
     virtual void update() override;
 
 private:

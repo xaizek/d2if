@@ -26,10 +26,6 @@ class Layout : public Field
 public:
     Layout() = default;
 
-    // These operations are forbidden.
-    Layout(Layout &&rhs) = delete;
-    Layout & operator=(Layout &&rhs) = delete;
-
     virtual void update() override;
 
 private:
