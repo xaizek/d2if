@@ -1,4 +1,4 @@
-CXXFLAGS := -Wall -U__GTHREADS -O3 -MD -Werror -std=c++11
+CXXFLAGS := -U__GTHREADS -MD -Wall -Werror -std=c++11
 LDFLAGS := -lasound -lX11
 
 DZEN2 ?= dzen2
@@ -7,7 +7,14 @@ PROJECT_NAME := $(notdir $(abspath ..))
 SOURCE_FILES := $(wildcard *.cpp)
 OBJECT_FILES := $(SOURCE_FILES:.cpp=.o)
 
-.PHONY: run clear
+.PHONY: release debug run clear
+
+release: CXXFLAGS += -O3
+release: $(PROJECT_NAME)
+
+debug: CXXFLAGS += -O0 -g
+debug: LDFLAGS += -O0 -g
+debug: $(PROJECT_NAME)
 
 $(PROJECT_NAME): $(OBJECT_FILES)
 	g++ $(LDFLAGS) $(OBJECT_FILES) -o $@
