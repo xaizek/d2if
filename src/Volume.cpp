@@ -102,5 +102,3 @@ std::pair<bool, int> Volume::getVolumeLevel() const
 
     return {state, (100*(vol - min))/(max - min)};
 }
-
-// vim: set filetype=cpp.cpp11 :

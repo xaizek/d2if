@@ -40,5 +40,3 @@ private:
 };
 
 #endif // __VOLUME_HPP__
-
-// vim: set filetype=cpp.cpp11 :

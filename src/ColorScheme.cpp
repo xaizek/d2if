@@ -62,5 +62,3 @@ ColorScheme::colors_t::const_iterator ColorScheme::findColor(
 
     return color;
 }
-
-// vim: set filetype=cpp.cpp11 :

@@ -79,5 +79,3 @@ Cpu::cpuInfo Cpu::getCpuUsage() const
 
     return { user + nice + system + idle, idle };
 }
-
-// vim: set filetype=cpp.cpp11 :

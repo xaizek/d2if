@@ -52,5 +52,3 @@ private:
 std::ostream & operator<<(std::ostream &os, const Field *field);
 
 #endif // __FIELD_HPP__
-
-// vim: set filetype=cpp.cpp11 :

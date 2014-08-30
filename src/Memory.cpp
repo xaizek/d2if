@@ -80,5 +80,3 @@ int Memory::getMemoryUsage() const
 
     return usage;
 }
-
-// vim: set filetype=cpp.cpp11 :

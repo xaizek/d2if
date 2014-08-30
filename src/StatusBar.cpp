@@ -78,5 +78,3 @@ std::string StatusBar::getText() const
 
     return (result.str());
 }
-
-// vim: set filetype=cpp.cpp11 :

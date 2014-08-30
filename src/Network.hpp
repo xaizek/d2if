@@ -48,5 +48,3 @@ private:
 };
 
 #endif // __NETWORK_HPP__
-
-// vim: set filetype=cpp.cpp11 :

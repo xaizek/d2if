@@ -39,5 +39,3 @@ void Time::update()
 
     Time::setText(result.str());
 }
-
-// vim: set filetype=cpp.cpp11 :

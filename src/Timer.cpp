@@ -39,5 +39,3 @@ void Timer::run(std::chrono::milliseconds period)
         usleep(ms);
     }
 }
-
-// vim: set filetype=cpp.cpp11 :

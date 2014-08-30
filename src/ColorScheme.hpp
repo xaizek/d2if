@@ -42,5 +42,3 @@ private:
 };
 
 #endif // __COLORSCHEME_HPP__
-
-// vim: set filetype=cpp.cpp11 :

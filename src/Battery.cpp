@@ -90,5 +90,3 @@ std::pair<bool, int> Battery::getBatteryState() const
         return { false, -1 };
     }
 }
-
-// vim: set filetype=cpp.cpp11 :

@@ -27,5 +27,3 @@ void Layout::update()
         Field::setText(kbd.getCurrentGroupSymbol());
     }
 }
-
-// vim: set filetype=cpp.cpp11 :

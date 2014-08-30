@@ -34,5 +34,3 @@ private:
 };
 
 #endif // __BATTERY_HPP__
-
-// vim: set filetype=cpp.cpp11 :

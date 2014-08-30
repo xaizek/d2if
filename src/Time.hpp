@@ -34,5 +34,3 @@ private:
 };
 
 #endif // __TIME_HPP__
-
-// vim: set filetype=cpp.cpp11 :

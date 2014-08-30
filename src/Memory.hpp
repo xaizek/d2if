@@ -32,5 +32,3 @@ private:
 };
 
 #endif // __MEMORY_HPP__
-
-// vim: set filetype=cpp.cpp11 :

@@ -69,5 +69,3 @@ int main(void)
 
     return EXIT_SUCCESS;
 }
-
-// vim: set filetype=cpp.cpp11 :

@@ -56,5 +56,3 @@ int Display::getDisplayBrightness() const
         return -1;
     }
 }
-
-// vim: set filetype=cpp.cpp11 :

@@ -144,5 +144,3 @@ T readFromFile(const std::string &filename)
 
     return result;
 }
-
-// vim: set filetype=cpp.cpp11 :

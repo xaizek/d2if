@@ -33,5 +33,3 @@ private:
 };
 
 #endif // __LAYOUT_HPP__
-
-// vim: set filetype=cpp.cpp11 :
