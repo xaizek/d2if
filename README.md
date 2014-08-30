@@ -13,6 +13,11 @@ it will require less resources and work faster than scripts written in
 interpretable languages.  The amount of memory and CPU time should be considered
 since status bar should be updated regularly.
 
+Configuration
+-------------
+
+None (at least yet).  Body of `main()` configures everything.
+
 Fields
 ------
 
