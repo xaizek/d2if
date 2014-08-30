@@ -20,15 +20,20 @@
 
 #include "Field.hpp"
 
+class ColorScheme;
+
 class Display : public Field
 {
 public:
-    using Field::Field;
+    Display(const ColorScheme& colorScheme);
 
     virtual void update() override;
 
 private:
     int getDisplayBrightness() const;
+
+private:
+    int initialBrightness;
 };
 
 #endif // D2IF__DISPLAY_HPP__

@@ -21,19 +21,30 @@
 #include <sstream>
 #include <string>
 
+Display::Display(const ColorScheme& colorScheme)
+    : Field(colorScheme)
+{
+    setVisible(false);
+    initialBrightness = getDisplayBrightness();
+}
+
 void Display::update()
 {
-    const int actual { getDisplayBrightness() };
-    const bool visible { actual >= 0 };
-    Field::setVisible(visible);
-    if (visible) {
-        std::ostringstream result;
+    const int actualBrightness { getDisplayBrightness() };
 
-        result << "DB: "
-               << actual << "%";
-
-        Field::setText(result.str());
+    if (actualBrightness != initialBrightness && !isVisible()) {
+        setVisible(true);
     }
+
+    if (!isVisible()) {
+        return;
+    }
+
+    std::ostringstream result;
+
+    result << "DB: " << actualBrightness << "%";
+
+    Field::setText(result.str());
 }
 
 int Display::getDisplayBrightness() const
