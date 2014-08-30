@@ -21,6 +21,14 @@
 
 #include <memory>
 #include <sstream>
+#include <string>
+#include <utility>
+
+Volume::Volume(const ColorScheme& colorScheme, std::string cardName)
+    : Field(colorScheme)
+    , cardName(std::move(cardName))
+{
+}
 
 void Volume::update()
 {
@@ -53,7 +61,7 @@ std::pair<bool, int> Volume::getVolumeLevel() const
     };
     raw_handle = nullptr;
 
-    if (snd_mixer_attach(handle.get(), "default") < 0) {
+    if (snd_mixer_attach(handle.get(), cardName.c_str()) < 0) {
         return {false, -1};
     }
     if (snd_mixer_selem_register(handle.get(), nullptr, nullptr) < 0) {

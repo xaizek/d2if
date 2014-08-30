@@ -18,19 +18,25 @@
 #ifndef __VOLUME_HPP__
 #define __VOLUME_HPP__
 
+#include <string>
 #include <utility>
 
 #include "Field.hpp"
 
+class ColorScheme;
+
 class Volume : public Field
 {
 public:
-    using Field::Field;
+    Volume(const ColorScheme& colorScheme, std::string cardName);
 
     virtual void update() override;
 
 private:
     std::pair<bool, int> getVolumeLevel() const;
+
+private:
+    const std::string cardName;
 };
 
 #endif // __VOLUME_HPP__
