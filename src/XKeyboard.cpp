@@ -242,6 +242,7 @@ int XKeyboard::currentGroupNum() const
 
 std::size_t XKeyboard::getGroupCount() const
 {
+    static_cast<void>(const_cast<XKeyboard *>(this)->initializeXkb());
     return static_cast<std::size_t>(_groupNames.size());
 }
 
