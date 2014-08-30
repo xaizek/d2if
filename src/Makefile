@@ -10,6 +10,7 @@ OBJECT_FILES := $(SOURCE_FILES:.cpp=.o)
 .PHONY: release debug run clear
 
 release: CXXFLAGS += -O3
+release: export STRIP := yes
 release: $(PROJECT_NAME)
 
 debug: CXXFLAGS += -O0 -g
@@ -18,6 +19,7 @@ debug: $(PROJECT_NAME)
 
 $(PROJECT_NAME): $(OBJECT_FILES)
 	g++ $(LDFLAGS) $(OBJECT_FILES) -o $@
+	if [ -n "$$STRIP" ]; then strip $@; fi
 
 run: $(PROJECT_NAME)
 	./$^ | $(DZEN2) -ta l -h 17 -fn -*-inconsolata-bold-*-*--13-*-*-*-*-*-*-*
