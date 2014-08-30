@@ -35,13 +35,15 @@ void Volume::update()
     static const std::string fgBadColor { "^fg(" + getColor("fg-bad") + ")" };
     static const std::string fgGoodColor { "^fg(" + getColor("fg-good") + ")" };
 
-    const std::pair<bool, int> &state { getVolumeLevel() };
+    bool enabled;
+    int level;
+    std::tie(enabled, level) = getVolumeLevel();
 
     std::ostringstream result;
 
     result << "A: "
-           << (state.first ? fgGoodColor : fgBadColor)
-           << ((state.second < 0) ? "XX" : std::to_string(state.second)) << "%";
+           << (enabled ? fgGoodColor : fgBadColor)
+           << ((level < 0) ? "XX" : std::to_string(level)) << "%";
 
     Field::setText(result.str());
 }
