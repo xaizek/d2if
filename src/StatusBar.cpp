@@ -48,6 +48,9 @@ void StatusBar::setFieldDelimiterColor(const std::string &delimiterColor)
 {
     fieldDelimiterColor = delimiterColor;
     colorCache = "^fg(" + fieldDelimiterColor + ")";
+
+    // reset delimeter to update its cache
+    setFieldDelimiter(fieldDelimiter);
 }
 
 std::string StatusBar::getText() const

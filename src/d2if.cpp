@@ -42,6 +42,9 @@ int main(void)
         std::make_shared<Network>(),
     };
 
+    statusBar.setFieldDelimiter(" | ");
+    statusBar.setFieldDelimiterColor("white");
+
     Timer timer {
         [&]() {
             std::cout << statusBar.getText() << std::endl;
