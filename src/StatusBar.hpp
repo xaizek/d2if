@@ -15,8 +15,8 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
-#ifndef __STATUSBAR_HPP__
-#define __STATUSBAR_HPP__
+#ifndef D2IF__STATUSBAR_HPP__
+#define D2IF__STATUSBAR_HPP__
 
 #include <initializer_list>
 #include <string>
@@ -49,4 +49,4 @@ private:
     std::string sepCache { "^pa(;0)^fg(white)" };
 };
 
-#endif // __STATUSBAR_HPP__
+#endif // D2IF__STATUSBAR_HPP__

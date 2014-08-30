@@ -15,8 +15,8 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
-#ifndef __TIMER_HPP__
-#define __TIMER_HPP__
+#ifndef D2IF__TIMER_HPP__
+#define D2IF__TIMER_HPP__
 
 #include <chrono>
 #include <functional>
@@ -38,4 +38,4 @@ private:
     const handler_t handler;
 };
 
-#endif // __TIMER_HPP__
+#endif // D2IF__TIMER_HPP__

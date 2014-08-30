@@ -15,8 +15,8 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
-#ifndef __FIELD_HPP__
-#define __FIELD_HPP__
+#ifndef D2IF__FIELD_HPP__
+#define D2IF__FIELD_HPP__
 
 #include <iosfwd>
 #include <memory>
@@ -51,4 +51,4 @@ private:
 
 std::ostream & operator<<(std::ostream &os, const Field *field);
 
-#endif // __FIELD_HPP__
+#endif // D2IF__FIELD_HPP__

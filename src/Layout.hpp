@@ -15,8 +15,8 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
-#ifndef __LAYOUT_HPP__
-#define __LAYOUT_HPP__
+#ifndef D2IF__LAYOUT_HPP__
+#define D2IF__LAYOUT_HPP__
 
 #include "Field.hpp"
 #include "XKeyboard.hpp"
@@ -32,4 +32,4 @@ private:
     XKeyboard kbd;
 };
 
-#endif // __LAYOUT_HPP__
+#endif // D2IF__LAYOUT_HPP__

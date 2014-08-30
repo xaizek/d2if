@@ -15,8 +15,8 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
-#ifndef __CPU_HPP__
-#define __CPU_HPP__
+#ifndef D2IF__CPU_HPP__
+#define D2IF__CPU_HPP__
 
 #include <utility>
 
@@ -38,4 +38,4 @@ private:
     cpuInfo getCpuUsage() const;
 };
 
-#endif // __CPU_HPP__
+#endif // D2IF__CPU_HPP__

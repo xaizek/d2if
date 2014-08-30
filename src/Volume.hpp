@@ -15,8 +15,8 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
-#ifndef __VOLUME_HPP__
-#define __VOLUME_HPP__
+#ifndef D2IF__VOLUME_HPP__
+#define D2IF__VOLUME_HPP__
 
 #include <string>
 #include <utility>
@@ -39,4 +39,4 @@ private:
     const std::string cardName;
 };
 
-#endif // __VOLUME_HPP__
+#endif // D2IF__VOLUME_HPP__

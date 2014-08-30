@@ -8,8 +8,8 @@
 // Software Foundation; either version 2 of the License, or (at your option)
 // any later version.
 
-#ifndef XKEYBOARD_HPP
-#define XKEYBOARD_HPP
+#ifndef D2IF__XKEYBOARD_HPP__
+#define D2IF__XKEYBOARD_HPP__
 
 #include <cstddef>
 
@@ -66,4 +66,4 @@ private:
     StringVector _nonSymbols;
 };
 
-#endif // XKEYBOARD_HPP
+#endif // D2IF__XKEYBOARD_HPP__
