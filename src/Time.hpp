@@ -25,7 +25,7 @@
 class Time : public Field
 {
 public:
-    Time() = default;
+    using Field::Field;
 
     virtual void update() override;
 

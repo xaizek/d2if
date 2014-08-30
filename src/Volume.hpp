@@ -25,7 +25,7 @@
 class Volume : public Field
 {
 public:
-    Volume() = default;
+    using Field::Field;
 
     virtual void update() override;
 

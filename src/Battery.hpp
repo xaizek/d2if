@@ -25,7 +25,7 @@
 class Battery : public Field
 {
 public:
-    Battery() = default;
+    using Field::Field;
 
     virtual void update() override;
 

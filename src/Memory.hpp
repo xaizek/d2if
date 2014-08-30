@@ -23,7 +23,7 @@
 class Memory : public Field
 {
 public:
-    Memory() = default;
+    using Field::Field;
 
     virtual void update() override;
 

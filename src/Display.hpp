@@ -23,7 +23,7 @@
 class Display : public Field
 {
 public:
-    Display() = default;
+    using Field::Field;
 
     virtual void update() override;
 

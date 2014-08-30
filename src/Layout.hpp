@@ -24,7 +24,7 @@
 class Layout : public Field
 {
 public:
-    Layout() = default;
+    using Field::Field;
 
     virtual void update() override;
 
