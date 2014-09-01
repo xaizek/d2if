@@ -21,10 +21,9 @@
 
 #include <chrono>
 #include <functional>
-#include <thread>
 
 Timer::Timer(handler_t handler)
-    :handler(handler)
+    : handler(handler)
 {
 }
 
