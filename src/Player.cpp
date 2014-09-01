@@ -50,13 +50,7 @@ Player::Player(const ColorScheme& colorScheme, std::string host, int port)
                     mpdClient.waitForChanges();
                 }
             } catch (std::runtime_error &e) {
-                using namespace std::chrono;
-
-                auto ms = duration_cast<microseconds>(
-                    milliseconds(500)
-                ).count();
-
-                usleep(ms);
+                std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
                 // XXX: this might be non thread safe
                 status.clear();

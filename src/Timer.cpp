@@ -17,10 +17,9 @@
 
 #include "Timer.hpp"
 
-#include <unistd.h>
-
 #include <chrono>
 #include <functional>
+#include <thread>
 
 Timer::Timer(handler_t handler)
     : handler(handler)
@@ -29,12 +28,8 @@ Timer::Timer(handler_t handler)
 
 void Timer::run(std::chrono::milliseconds period)
 {
-    using namespace std::chrono;
-
-    auto ms = duration_cast<microseconds>(period).count();
-
     while (true) {
         handler();
-        usleep(ms);
+        std::this_thread::sleep_for(period);
     }
 }
