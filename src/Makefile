@@ -14,6 +14,7 @@ release: export STRIP := yes
 release: $(PROJECT_NAME)
 
 debug: CXXFLAGS += -O0 -g
+debug: CXXFLAGS += -D_GLIBCXX_DEBUG
 debug: LDFLAGS += -O0 -g
 debug: $(PROJECT_NAME)
 

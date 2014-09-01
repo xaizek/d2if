@@ -27,6 +27,7 @@
 #include "Layout.hpp"
 #include "Memory.hpp"
 #include "Network.hpp"
+#include "Player.hpp"
 #include "StatusBar.hpp"
 #include "Time.hpp"
 #include "Timer.hpp"
@@ -54,6 +55,7 @@ int main(void)
         std::make_shared<Volume>(colorScheme, "hw:1"),
         std::make_shared<Battery>(colorScheme),
         std::make_shared<Network>(colorScheme),
+        std::make_shared<Player>(colorScheme, "127.0.0.1", 6600),
     };
 
     statusBar.setFieldDelimiter(" | ");
