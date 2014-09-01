@@ -18,7 +18,6 @@
 #include "Timer.hpp"
 
 #include <chrono>
-#include <functional>
 #include <thread>
 
 Timer::Timer(handler_t handler)
@@ -28,8 +27,12 @@ Timer::Timer(handler_t handler)
 
 void Timer::run(std::chrono::milliseconds period)
 {
+    auto next = std::chrono::steady_clock::now();
+
     while (true) {
         handler();
-        std::this_thread::sleep_for(period);
+
+        next += period;
+        std::this_thread::sleep_until(next);
     }
 }
