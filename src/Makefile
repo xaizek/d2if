@@ -7,7 +7,7 @@ PROJECT_NAME := $(notdir $(abspath ..))
 SOURCE_FILES := $(wildcard *.cpp)
 OBJECT_FILES := $(SOURCE_FILES:.cpp=.o)
 
-.PHONY: release debug run clear
+.PHONY: release debug run clean
 
 release: CXXFLAGS += -O3
 release: export STRIP := yes
@@ -28,7 +28,7 @@ run: $(PROJECT_NAME)
 .cpp.o:
 	g++ -c $(CXXFLAGS) -o $@ $<
 
-clear:
+clean:
 	-$(RM) *.o *.d
 	-$(RM) $(PROJECT_NAME)
 
