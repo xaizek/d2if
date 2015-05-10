@@ -130,7 +130,7 @@ std::string MpdClient::getCurrentSong()
         return artist.empty() ? title : artist;
     }
 
-    return artist + " - " + title;
+    return artist + " − " + title;
 }
 
 MpdState MpdClient::getState()
