@@ -126,6 +126,17 @@ std::string MpdClient::getCurrentSong()
     const std::string artist = metadata["Artist"];
     const std::string title = metadata["Title"];
 
+    if (artist.empty() && title.empty()) {
+        // use file name without extension if both artist and title tags are
+        // empty
+
+        const std::string file = metadata["file"];
+        // relying on integer overflow when find_first_not_of() returns npos
+        const int namePos = file.find_last_of('/') + 1;
+        const int dotPos = file.find_last_of('.');
+        return std::string(file, namePos, dotPos - namePos);
+    }
+
     if (artist.empty() || title.empty()) {
         return artist.empty() ? title : artist;
     }
