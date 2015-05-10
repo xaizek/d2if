@@ -45,7 +45,7 @@ Player::Player(const ColorScheme& colorScheme, std::string host, int port)
                     const MpdState state = mpdClient.getState();
 
                     // XXX: this might be non thread safe
-                    status = getStateMark(state) + ' ' + song;
+                    status = getStateMark(state) + " " + song;
 
                     mpdClient.waitForChanges();
                 }
