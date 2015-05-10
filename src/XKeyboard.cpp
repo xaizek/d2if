@@ -20,6 +20,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <memory>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -81,7 +82,16 @@ bool XKeyboard::initializeXkb()
     int _baseErrorCode;
     (void)XkbQueryExtension(_display, &opCode, &_baseEventCode, &_baseErrorCode,  &major, &minor);
 
-    XkbDescRec* kbdDescPtr = XkbAllocKeyboard();
+    static const auto kbdDescDeleter = [] (XkbDescRec *kbd) {
+        if (kbd != nullptr) {
+            XkbFreeKeyboard(kbd, 0, True);
+        }
+    };
+
+    std::unique_ptr<XkbDescRec, decltype(kbdDescDeleter)> kbdDescPtr {
+        XkbAllocKeyboard(), kbdDescDeleter
+    };
+
     if (kbdDescPtr == NULL) {
         std::cerr << "Failed to get keyboard description." << std::endl;
         return False;
@@ -92,9 +102,9 @@ bool XKeyboard::initializeXkb()
         kbdDescPtr->device_spec = _deviceId;
     }
 
-    XkbGetControls(_display, XkbAllControlsMask, kbdDescPtr);
-    XkbGetNames(_display, XkbSymbolsNameMask, kbdDescPtr);
-    XkbGetNames(_display, XkbGroupNamesMask, kbdDescPtr);
+    XkbGetControls(_display, XkbAllControlsMask, kbdDescPtr.get());
+    XkbGetNames(_display, XkbSymbolsNameMask, kbdDescPtr.get());
+    XkbGetNames(_display, XkbGroupNamesMask, kbdDescPtr.get());
 
     if (kbdDescPtr->names == NULL) {
         std::cerr << "Failed to get keyboard description." << std::endl;
