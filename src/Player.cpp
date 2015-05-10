@@ -62,9 +62,9 @@ Player::Player(const ColorScheme& colorScheme, std::string host, int port)
 static std::string getStateMark(MpdState state)
 {
     switch (state) {
-        case MpdState::Stop: return "[-]";
-        case MpdState::Play: return "[>]";
-        case MpdState::Pause: return "[=]";
+        case MpdState::Stop: return "▷▷";
+        case MpdState::Play: return "▶▶";
+        case MpdState::Pause: return "▶▷";
 
         default: return std::string();
     }
