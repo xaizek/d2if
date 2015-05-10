@@ -50,7 +50,11 @@ void Volume::update()
 
 std::pair<bool, int> Volume::getVolumeLevel() const
 {
-    static const auto mixerDeleter = [] (snd_mixer_t *mixer) {
+    // TODO: don't repeat the whole procedure every time.  Even if we can't
+    // keep handles around for a while, at least cache `min` and `max` values.
+
+    const auto mixerDeleter = [this] (snd_mixer_t *mixer) {
+        snd_mixer_detach(mixer, cardName.c_str());
         snd_mixer_close(mixer);
     };
 
