@@ -61,8 +61,10 @@ void Network::update()
             std::get<1>(iface.second) ? fgGoodColor : fgBadColor
         };
 
-        result << fgColor << std::get<0>(iface.second) << ": "
-               << speedColor
+        if (ifaces.size() > 1) {
+            result << fgColor << std::get<0>(iface.second) << ": ";
+        }
+        result << speedColor
                << std::setw(3) << rx << " k↓ "
                << std::setw(3) << tx << " k↑";
     }
