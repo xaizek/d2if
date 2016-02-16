@@ -38,23 +38,23 @@ void Battery::update()
     const bool charging = state.first;
     const int remaining = state.second;
 
-    const bool visible = remaining >= 0;
-    Field::setVisible(visible);
-
-    if (visible) {
-        const std::string &fgColor = charging ? fgGoodColor : fgBadColor;
-
-        std::ostringstream result;
-
-        result << "^fg(white)BAT:"
-               << "^p(2;3)"
-               << fgBarColor
-               << "^r(" << remaining << "x10)"
-               << fgColor
-               << "^r(" << (100 - remaining) << "x10)";
-
-        Field::setText(result.str());
+    if (remaining < 0) {
+        setVisible(false);
+        return;
     }
+
+    const std::string &fgColor = charging ? fgGoodColor : fgBadColor;
+
+    std::ostringstream result;
+
+    result << "^fg(white)BAT:"
+           << "^p(2;3)"
+           << fgBarColor
+           << "^r(" << remaining << "x10)"
+           << fgColor
+           << "^r(" << (100 - remaining) << "x10)";
+
+    Field::setText(result.str());
 }
 
 std::pair<bool, int> Battery::getBatteryState() const
