@@ -52,7 +52,7 @@ int main(void)
         std::make_shared<Memory>(colorScheme),
         std::make_shared<Cpu>(colorScheme),
         std::make_shared<Display>(colorScheme),
-        std::make_shared<Volume>(colorScheme, "hw:1"),
+        std::make_shared<Volume>(colorScheme, "default"),
         std::make_shared<Battery>(colorScheme),
         std::make_shared<Network>(colorScheme),
         std::make_shared<Player>(colorScheme, "127.0.0.1", 6600),
