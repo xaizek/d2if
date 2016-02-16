@@ -1,4 +1,4 @@
-CXXFLAGS := -U__GTHREADS -MD -Wall -Werror -std=c++11
+CXXFLAGS := -U__GTHREADS -MMD -Wall -Werror -std=c++11
 LDFLAGS := -lasound -lX11 -lpthread
 
 DZEN2 ?= dzen2
