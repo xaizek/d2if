@@ -197,7 +197,12 @@ MpdClient::colon_data_t MpdClient::makeRequest(const std::string &cmd)
 
         const std::string tag(str, 0, colonPos);
         const std::string value(str, dataPos);
-        colonData[tag] = value;
+
+        if (colonData.find(tag) != colonData.cend()) {
+            colonData[tag] += ", " + value;
+        } else {
+            colonData[tag] = value;
+        }
     }
 
     return colonData;
