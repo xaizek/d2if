@@ -23,6 +23,7 @@
 #include "Battery.hpp"
 #include "ColorScheme.hpp"
 #include "Cpu.hpp"
+#include "Desktop.hpp"
 #include "Display.hpp"
 #include "Layout.hpp"
 #include "Memory.hpp"
@@ -48,6 +49,7 @@ int main(void)
 
     StatusBar statusBar = {
         std::make_shared<Time>(colorScheme),
+        std::make_shared<Desktop>(colorScheme),
         std::make_shared<Layout>(colorScheme),
         std::make_shared<Memory>(colorScheme),
         std::make_shared<Cpu>(colorScheme),
