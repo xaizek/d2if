@@ -20,12 +20,12 @@
 #include <algorithm>
 #include <functional>
 #include <iostream>
-#include <iterator>
 #include <memory>
 #include <sstream>
 #include <string>
 #include <vector>
 
+#include "DelimOstreamIterator.hpp"
 #include "Field.hpp"
 
 StatusBar::StatusBar(std::initializer_list<std::shared_ptr<Field>> fields)
@@ -67,14 +67,8 @@ std::string StatusBar::getText() const
 
     std::ostringstream result;
     result << "^pa(2;0)";
+    std::copy(visibleFields.begin(), visibleFields.end(),
+              DelimOstreamIterator<Field*>(result, sepCache.c_str()));
 
-    std::ostream_iterator<Field*> outIt { result, sepCache.c_str() };
-    if (visibleFields.size() > 1) {
-        std::copy(visibleFields.begin(), visibleFields.end() - 1, outIt);
-    }
-    if (!visibleFields.empty()) {
-        result << visibleFields.back();
-    }
-
-    return (result.str());
+    return result.str();
 }
