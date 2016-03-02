@@ -2,7 +2,8 @@ dzen2 input formatter
 =====================
 
 Copyright (C) 2012 xaizek <xaizek@openmailbox.org>
-Licensed under GNU/GPL 2.
+
+Licensed under GNU/GPL v2.
 
 Brief description
 -----------------
@@ -21,18 +22,13 @@ None (at least yet).  Body of `main()` configures everything.
 Fields
 ------
 
-* Date and time (basic implementation).
-* Memory usage (basic implementation).
-* CPU usage (basic implementation).
-* Display brightness (basic implementation).
-* Current audio level (basic implementation).
-* Battery status (basic implementation).
-* Network interfaces status (basic implementation).
-* Active keyboard layout (basic implementation).
-* MPD status and currently playing song (basic implementation).
-
-Features
---------
-
-* Configurable update time (not implemented yet).
-* Configurable field separator (not implemented yet).
+* Date and time.
+* Current desktop number.
+* Active keyboard layout.
+* Memory usage.
+* CPU usage.
+* Display brightness.
+* Current audio level.
+* Battery status.
+* Network interfaces status.
+* MPD status and currently playing song.
