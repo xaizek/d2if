@@ -15,8 +15,8 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
-#ifndef DELIMOSTREAMITERATOR_HPP__
-#define DELIMOSTREAMITERATOR_HPP__
+#ifndef D2IF__DELIMOSTREAMITERATOR_HPP__
+#define D2IF__DELIMOSTREAMITERATOR_HPP__
 
 #include <iterator>
 #include <iosfwd>
@@ -95,4 +95,4 @@ private:
     bool first;
 };
 
-#endif // DELIMOSTREAMITERATOR_HPP__
+#endif // D2IF__DELIMOSTREAMITERATOR_HPP__
