@@ -28,14 +28,9 @@
 #include "DelimOstreamIterator.hpp"
 #include "Field.hpp"
 
-StatusBar::StatusBar(std::initializer_list<std::shared_ptr<Field>> fields)
-    :fields(fields.begin(), fields.end())
+StatusBar::StatusBar(std::vector<std::unique_ptr<Field>> fields)
+    : fields(std::move(fields))
 {
-}
-
-void StatusBar::addField(std::shared_ptr<Field> field)
-{
-    fields.push_back(field);
 }
 
 void StatusBar::setFieldDelimiter(const std::string &delimiter)
@@ -58,7 +53,7 @@ std::string StatusBar::getText() const
     std::vector<Field*> visibleFields;
     visibleFields.reserve(fields.size());
 
-    for (const std::shared_ptr<Field> &field : fields) {
+    for (const std::unique_ptr<Field> &field : fields) {
         field->update();
         if (field->isVisible()) {
             visibleFields.push_back(field.get());

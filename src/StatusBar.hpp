@@ -28,13 +28,11 @@
 class StatusBar
 {
 public:
-    StatusBar(std::initializer_list<std::shared_ptr<Field>> fields);
+    StatusBar(std::vector<std::unique_ptr<Field>> fields);
 
     // These operations are forbidden.
     StatusBar(StatusBar &rhs) = delete;
     StatusBar & operator=(StatusBar &rhs) = delete;
-
-    void addField(std::shared_ptr<Field> field);
 
     void setFieldDelimiter(const std::string &delimiter);
     void setFieldDelimiterColor(const std::string &delimiterColor);
@@ -42,7 +40,7 @@ public:
     std::string getText() const;
 
 private:
-    std::vector<std::shared_ptr<Field>> fields;
+    const std::vector<std::unique_ptr<Field>> fields;
     std::string fieldDelimiter;
     std::string fieldDelimiterColor;
     std::string colorCache { "^fg()" };
