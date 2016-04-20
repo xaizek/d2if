@@ -18,7 +18,7 @@
 #ifndef D2IF__PLAYER_HPP__
 #define D2IF__PLAYER_HPP__
 
-#include <atomic>
+#include <memory>
 #include <string>
 
 #include "Field.hpp"
@@ -36,7 +36,7 @@ private:
     const std::string host;
     const int port;
 
-    std::string status;
+    std::shared_ptr<std::string> status;
 };
 
 #endif // D2IF__PLAYER_HPP__

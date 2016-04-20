@@ -19,7 +19,9 @@
 
 #include <unistd.h>
 
+#include <atomic>
 #include <chrono>
+#include <memory>
 #include <stdexcept>
 #include <string>
 #include <thread>
@@ -44,17 +46,18 @@ Player::Player(const ColorScheme& colorScheme, std::string host, int port)
                     const std::string song = mpdClient.getCurrentSong();
                     const MpdState state = mpdClient.getState();
 
-                    // XXX: this might be non thread safe
-                    status = getStateMark(state) + " " + song;
+                    std::string newStatus = getStateMark(state) + " " + song;
+                    std::atomic_exchange(
+                        &status, std::make_shared<std::string>(newStatus));
 
                     mpdClient.waitForChanges();
                 }
-            } catch (std::runtime_error &e) {
-                std::this_thread::sleep_for(std::chrono::milliseconds(500));
-
-                // XXX: this might be non thread safe
-                status.clear();
+            } catch (std::runtime_error &) {
+                std::atomic_exchange(&status, {});
             }
+
+            // Do not consume CPU for nothing while there is no connection.
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
         }
     }).detach();
 }
@@ -72,5 +75,7 @@ static std::string getStateMark(MpdState state)
 
 void Player::update()
 {
-    Field::setText(status);
+    if (std::shared_ptr<std::string> text = std::atomic_exchange(&status, {})) {
+        Field::setText(*text);
+    }
 }
