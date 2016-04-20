@@ -33,14 +33,12 @@ static std::string getStateMark(MpdState state);
 
 Player::Player(const ColorScheme& colorScheme, std::string host, int port)
     : Field(colorScheme)
-    , host(std::move(host))
-    , port(port)
 {
-    std::thread([this]()
+    std::thread([=]()
     {
         while (true) {
             try {
-                MpdClient mpdClient(this->host, this->port);
+                MpdClient mpdClient(host, port);
 
                 while (true) {
                     const std::string song = mpdClient.getCurrentSong();

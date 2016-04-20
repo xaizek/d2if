@@ -33,9 +33,6 @@ public:
     virtual void update() override;
 
 private:
-    const std::string host;
-    const int port;
-
     std::shared_ptr<std::string> status;
 };
 
