@@ -252,7 +252,10 @@ int XKeyboard::currentGroupNum() const
 
 std::size_t XKeyboard::getGroupCount() const
 {
-    static_cast<void>(const_cast<XKeyboard *>(this)->initializeXkb());
+    // this probably supposed to update list of layouts, but loading it every
+    // time isn't nice and results in memory leak in _symbolNames (elements are
+    // appended there)
+    // static_cast<void>(const_cast<XKeyboard *>(this)->initializeXkb());
     return static_cast<std::size_t>(_groupNames.size());
 }
 
