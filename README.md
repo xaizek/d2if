@@ -3,16 +3,16 @@ dzen2 input formatter
 
 Copyright (C) 2012 xaizek <xaizek@openmailbox.org>
 
-Licensed under GNU/GPL v2.
+Licensed under GNU/GPL v2+.
 
 Brief description
 -----------------
 
-This is a simple dzen2 input formatter, which is intender to omit using of
-scripts to do this job.  Compilable language is better for this purpose, since
-it will require less resources and work faster than scripts written in
-interpretable languages.  The amount of memory and CPU time should be considered
-since status bar should be updated regularly.
+This is a simple dzen2 input formatter, which is intended to replace use of
+scripts to do this job.  Compiled language is better for this purpose, because
+native applications require less resources and work faster than scripts.  The
+amount of memory and CPU time should be considered for obvious reason that
+status bar is updated with relatively high rate.
 
 Configuration
 -------------
@@ -28,7 +28,7 @@ Fields
 * Memory usage.
 * CPU usage.
 * Display brightness.
-* Current audio level.
+* Current audio volume level.
 * Battery status.
 * Network interfaces status.
 * MPD status and currently playing song.
