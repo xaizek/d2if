@@ -1,7 +1,7 @@
 // xkeyboard.cpp
 // Implementation of a class to get keyboard layout information and change layouts
 // Copyright (C) 2008 by Jay Bromley <jbromley@gmail.com>
-// Copyright (C) 2012 by xaizek <xaize@openmailbox.org>
+// Copyright (C) 2012 by xaizek <xaizek@posteo.net>
 //
 // This program is free software; you can redistribute it and/or modify it
 // under the terms of the GNU General Public License as published by the Free

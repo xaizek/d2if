@@ -1,8 +1,6 @@
 dzen2 input formatter
 =====================
 
-Copyright (C) 2012 xaizek <xaizek@openmailbox.org>
-
 Licensed under GNU/GPL v2+.
 
 Brief description
