@@ -45,6 +45,7 @@ void Network::update()
     std::ostringstream result;
 
     const Network::ifaceList &ifaces { getIfacesInfo() };
+    int i = 0;
     for (const std::pair<std::string, ifaceInfo> &iface : ifaces) {
         const auto prevIt = last.find(iface.first);
         const ifaceInfo prev {
@@ -67,6 +68,9 @@ void Network::update()
         result << speedColor
                << std::setw(3) << rx << " k↓ "
                << std::setw(3) << tx << " k↑";
+        if (i < static_cast<int>(ifaces.size()) - 1) {
+            result << ' ';
+        }
     }
 
     Field::setText(result.str());
