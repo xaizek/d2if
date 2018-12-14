@@ -68,7 +68,7 @@ void Network::update()
         result << speedColor
                << std::setw(3) << rx << " k↓ "
                << std::setw(3) << tx << " k↑";
-        if (i < static_cast<int>(ifaces.size()) - 1) {
+        if (i++ < static_cast<int>(ifaces.size()) - 1) {
             result << ' ';
         }
     }
