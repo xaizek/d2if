@@ -18,6 +18,7 @@
 #ifndef D2IF__NETWORK_HPP__
 #define D2IF__NETWORK_HPP__
 
+#include <functional>
 #include <map>
 #include <string>
 #include <tuple>

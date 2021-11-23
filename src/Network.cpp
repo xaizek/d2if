@@ -46,7 +46,7 @@ void Network::update()
 
     const Network::ifaceList &ifaces { getIfacesInfo() };
     int i = 0;
-    for (const std::pair<std::string, ifaceInfo> &iface : ifaces) {
+    for (const std::pair<const std::string, ifaceInfo> &iface : ifaces) {
         const auto prevIt = last.find(iface.first);
         const ifaceInfo prev {
             (prevIt == last.cend()
@@ -75,7 +75,7 @@ void Network::update()
 
     Field::setText(result.str());
 
-    for (const std::pair<std::string, ifaceInfo> &iface : ifaces) {
+    for (const std::pair<const std::string, ifaceInfo> &iface : ifaces) {
         auto it = last.find(iface.first);
         if (it != last.end()) {
             last.erase(it);
