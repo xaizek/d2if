@@ -20,6 +20,7 @@
 #include <unistd.h>
 
 #include <cassert>
+#include <cstdint>
 
 #include <fstream>
 #include <limits>
@@ -61,7 +62,7 @@ int Memory::getMemoryUsage() const
         return (-1);
     }
 
-    int total, free, avail, buffers, cached;
+    std::uint64_t total, free, avail, buffers, cached;
 
     meminfo.ignore(std::numeric_limits<std::streamsize>::max(), ':') >> total;
     meminfo.ignore(std::numeric_limits<std::streamsize>::max(), ':') >> free;
@@ -71,7 +72,7 @@ int Memory::getMemoryUsage() const
 
     meminfo.close();
 
-    const int usage {
+    const std::uint64_t usage {
         100 - ((free + buffers + cached)*100)/total
     };
 
