@@ -86,7 +86,21 @@ std::pair<bool, int> Battery::getBatteryState() const
         return {
             charged == "charged" || charged == "charging", (remaining*100)/full
         };
-    } else {
-        return { false, -1 };
     }
+
+    std::ifstream capacity { "/sys/class/power_supply/BAT0/capacity" };
+    std::ifstream status { "/sys/class/power_supply/BAT0/status" };
+    if (capacity.is_open() && status.is_open()) {
+        int level;
+        std::string state;
+
+        capacity >> level;
+        status >> state;
+
+        return {
+            state != "Discharging", level
+        };
+    }
+
+    return { false, -1 };
 }
