@@ -55,22 +55,48 @@ void Memory::update()
     Field::setText(result.str());
 }
 
+template <std::size_t N>
+bool startsWith(const std::string &str, const char (&prefix)[N])
+{
+    return str.compare(0, N - 1, prefix) == 0;
+}
+
+template <std::size_t N>
+bool extractUint64(const std::string &str, const char (&prefix)[N],
+                   std::uint64_t &value)
+{
+    if (!startsWith(str, prefix)) {
+        return false;
+    }
+
+    value = std::strtoull(str.c_str() + N, nullptr, 10);
+    return true;
+}
+
 int Memory::getMemoryUsage() const
 {
+    // Mimicking behaviour of `free` tool from `procps`, see `man free`.
+
     std::ifstream meminfo("/proc/meminfo");
     if (!meminfo.is_open()) {
         return (-1);
     }
 
-    std::uint64_t total, free, avail, buffers, cached;
-
-    meminfo.ignore(std::numeric_limits<std::streamsize>::max(), ':') >> total;
-    meminfo.ignore(std::numeric_limits<std::streamsize>::max(), ':') >> free;
-    meminfo.ignore(std::numeric_limits<std::streamsize>::max(), ':') >> avail;
-    meminfo.ignore(std::numeric_limits<std::streamsize>::max(), ':') >> buffers;
-    meminfo.ignore(std::numeric_limits<std::streamsize>::max(), ':') >> cached;
-
-    meminfo.close();
+    std::uint64_t total = 0, free = 0, buffers = 0, cached = 0;
+    for (std::string buf(64, '\0'); meminfo.getline(&buf[0], buf.size()); ) {
+        std::uint64_t value;
+        if (extractUint64(buf, "MemTotal:", value)) {
+            total = value;
+        } else if (extractUint64(buf, "MemFree:", value)) {
+            free = value;
+        } else if (extractUint64(buf, "Buffers:", value)) {
+            buffers = value;
+        } else if (extractUint64(buf, "Cached:", value)) {
+            cached += value;
+        } else if (extractUint64(buf, "SReclaimable:", value)) {
+            cached += value;
+        }
+    }
 
     const std::uint64_t usage {
         100 - ((free + buffers + cached)*100)/total
