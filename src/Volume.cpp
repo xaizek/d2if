@@ -58,13 +58,13 @@ std::pair<bool, int> Volume::getVolumeLevel() const
         if (snd_mixer_open(&raw_handle, 0) < 0) {
             return {false, -1};
         }
-
-        if (snd_mixer_attach(raw_handle, cardName.c_str()) < 0) {
-            return {false, -1};
-        }
         if (snd_mixer_selem_register(raw_handle, nullptr, nullptr) < 0) {
             return {false, -1};
         }
+    }
+
+    if (snd_mixer_attach(raw_handle, cardName.c_str()) < 0) {
+        return {false, -1};
     }
 
     if (snd_mixer_load(raw_handle) < 0) {
@@ -98,6 +98,10 @@ std::pair<bool, int> Volume::getVolumeLevel() const
     }
 
     snd_mixer_free(raw_handle);
+
+    if (snd_mixer_detach(raw_handle, cardName.c_str()) < 0) {
+        return {false, -1};
+    }
 
     return {state, (100*(vol - min))/(max - min)};
 }
